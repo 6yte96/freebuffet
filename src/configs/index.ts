@@ -5,6 +5,7 @@ import {
 } from "./opencode"
 import {
   generateCodexConfig as genCodex,
+  generateCodexEnvVars as genCodexEnv,
   getCodexConfigPath as getCodexPath,
 } from "./codex"
 import {
@@ -21,6 +22,7 @@ export const generateOpenCodeConfig = genOpenCode
 export const serializeOpenCodeConfig = serializeOpenCode
 export const getOpenCodeConfigPath = getOpenCodePath
 export const generateCodexConfig = genCodex
+export const generateCodexEnvVars = genCodexEnv
 export const getCodexConfigPath = getCodexPath
 export const generateClaudeEnvVars = genClaudeEnv
 export const generateClaudeSettingsJson = genClaudeSettings
@@ -38,7 +40,7 @@ export const AGENT_LABELS: Record<SupportedAgent, string> = {
   codex: "Codex CLI",
   claude: "Claude Code",
   antigravity: "Antigravity CLI",
-  all: "All of the above",
+  all: "All supported",
 }
 
 export function generateAllConfigs(
@@ -48,7 +50,7 @@ export function generateAllConfigs(
   const result: Record<string, { path: string; content: string }> = {}
 
   const targets = agents.includes("all")
-    ? (["opencode", "codex", "claude", "antigravity"] as SupportedAgent[])
+    ? (["opencode", "codex", "claude"] as SupportedAgent[])
     : agents
 
   for (const agent of targets) {

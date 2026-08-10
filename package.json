@@ -1,7 +1,7 @@
 {
   "name": "freebuffet",
   "version": "0.1.1",
-  "description": "All-you-can-eat LLM providers — set up 165+ providers for OpenCode, Codex, Claude Code & Antigravity CLI",
+  "description": "All-you-can-eat LLM providers — set up 165+ providers for OpenCode, Codex CLI, and Claude Code",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -73,8 +73,6 @@
     "bun": ">=1.0"
   },
   "dependencies": {
-    "@clack/prompts": "^0.10.1",
-    "freebuffet": "^0.1.0",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {

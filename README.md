@@ -1,13 +1,13 @@
-# multi-provider-setup
+# FreeBuffet
 
 **One CLI to configure every AI coding agent with 165 LLM providers.**
 
-Add API keys, health-check providers, and auto-generate configs for **OpenCode**, **Codex CLI**, **Claude Code**, and **Antigravity CLI** — all from one interactive terminal session.
+Add API keys, health-check providers, and auto-generate configs for **OpenCode**, **Codex CLI**, and **Claude Code** from one interactive terminal session.
 
 ```sh
-npx multi-provider-setup
+npx freebuffet
 # or
-bunx multi-provider-setup
+bunx freebuffet
 ```
 
 ---
@@ -17,9 +17,9 @@ bunx multi-provider-setup
 - **165 providers** — Groq, OpenAI, Anthropic, Together, Fireworks, DeepInfra, Cerebras, Replicate, Ollama, LM Studio, and 155+ more
 - **47 no-credit-card providers** — free tiers that don't require billing info
 - **99 permanent free tiers** — providers with always-free access
-- **18 local engines** — Ollama, llama.cpp, vLLM, LocalAI, LM Studio, and more (zero cost)
+- **19 local engines** — Ollama, llama.cpp, vLLM, LocalAI, LM Studio, and more (zero cost)
 - **Zero-config health check** — pings each provider's `/v1/models` or `/v1/messages`, measures latency, and discovers available models
-- **4 target agents** — generate configs for OpenCode, Codex CLI, Claude Code, and Antigravity CLI simultaneously
+- **3 target agents** — generate configs for OpenCode, Codex CLI, and Claude Code simultaneously
 - **Interactive TUI** — searchable provider list, API key prompts, live health check spinner, config preview
 - **Batteries included** — works immediately with [bun](https://bun.sh), no additional runtime deps
 
@@ -28,20 +28,20 @@ bunx multi-provider-setup
 Run the CLI:
 
 ```sh
-npx multi-provider-setup
+npx freebuffet
 ```
 
 Or if you have [bun](https://bun.sh) installed:
 
 ```sh
-bunx multi-provider-setup
+bunx freebuffet
 ```
 
 Or run globally:
 
 ```sh
-npm install -g multi-provider-setup
-mps
+npm install -g freebuffet
+fb
 ```
 
 ### The 5-Step Workflow
@@ -58,21 +58,21 @@ Step 3 ── Health check
      ▼           discovers available models
 Step 4 ── Select target agents
      │       OpenCode, Codex CLI, Claude Code,
-     ▼           Antigravity CLI — or all at once
+     ▼           or all at once
 Step 5 ── Configs generated
              Files written: opencode.json,
-             ~/.codex/config.toml, ~/.claude/settings.json,
-             ~/.config/antigravity/config.toml
+             ~/.local/share/opencode/auth.json,
+             ~/.codex/config.toml, ~/.codex/freebuffet.env,
+             ~/.claude/settings.json
 ```
 
 ### Output Files
 
 | Agent | File | Description |
 |-------|------|-------------|
-| **OpenCode** | `./opencode.json` | Provider config with model lists |
-| **Codex CLI** | `~/.codex/config.toml` | `[model_providers]` entries |
-| **Claude Code** | `~/.claude/settings.json` + `~/.claude/env.sh` | Settings JSON + env var helpers |
-| **Antigravity CLI** | `~/.config/antigravity/config.toml` | Provider entries |
+| **OpenCode** | `./opencode.json` + `~/.local/share/opencode/auth.json` | Provider config with model lists + API keys |
+| **Codex CLI** | `~/.codex/config.toml` + `~/.codex/freebuffet.env` | `[model_providers]` entries + API key exports |
+| **Claude Code** | `~/.claude/settings.json` + `~/.claude/env.sh` | Settings JSON + API key exports |
 
 ## Supported Providers (165)
 
@@ -119,8 +119,8 @@ OpenRouter, Portkey, Helicone, LiteLLM, Cloudflare AI Gateway, Vercel AI Gateway
 
 ```sh
 # Clone
-git clone https://github.com/YOUR_USER/multi-provider-setup
-cd multi-provider-setup
+git clone https://github.com/code6yte/freebuffet
+cd freebuffet
 
 # Install dependencies
 bun install
@@ -138,7 +138,7 @@ bun run dev             # bun run ./src/index.ts
 ### Project Structure
 
 ```
-multi-provider-setup/
+freebuffet/
 ├── src/
 │   ├── index.ts              # CLI entry point (5-step workflow)
 │   ├── providers.ts          # 165 provider definitions
@@ -148,7 +148,7 @@ multi-provider-setup/
 │       ├── opencode.ts       # opencode.json generator
 │       ├── codex.ts          # ~/.codex/config.toml generator
 │       ├── claude.ts         # Claude Code settings + env vars
-│       └── antigravity.ts    # Antigravity CLI config generator
+│       └── antigravity.ts    # Experimental Antigravity CLI config generator
 ├── scripts/
 │   ├── sync-modelscope-models.py
 │   └── opencode-with-modelscope

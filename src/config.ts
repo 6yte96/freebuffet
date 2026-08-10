@@ -3,13 +3,13 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs"
 import { homedir, hostname, platform } from "os"
 import { join } from "path"
 
-const APP_NAME = "multi-provider-setup"
+const APP_NAME = "freebuffet"
 const CONFIG_DIR = join(homedir(), ".config", APP_NAME)
 const CONFIG_PATH = join(CONFIG_DIR, "config.enc")
 const ALGORITHM = "aes-256-gcm"
 
 function deriveKey(): Buffer {
-  const pepper = "mps-ae85d1c3"
+  const pepper = "freebuffet-ae85d1c3"
   const seed = [homedir(), hostname(), platform()].join(":")
   return scryptSync(seed, pepper, 32)
 }

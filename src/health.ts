@@ -25,7 +25,7 @@ async function checkOpenAICompatible(
   try {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "User-Agent": "multi-provider-setup/0.1.0",
+      "User-Agent": "freebuffet/0.1.1",
     }
     if (apiKey) headers["Authorization"] = `Bearer ${apiKey}`
 
@@ -40,7 +40,7 @@ async function checkOpenAICompatible(
         provider,
         status: "ok",
         latencyMs,
-        models: models.slice(0, 50),
+        models,
       }
     }
 
@@ -88,7 +88,7 @@ async function checkAnthropicCompatible(
   try {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "User-Agent": "multi-provider-setup/0.1.0",
+      "User-Agent": "freebuffet/0.1.1",
       "x-api-key": apiKey,
       "anthropic-version": "2023-06-01",
     }
@@ -160,8 +160,8 @@ export async function checkAllProviders(
 }
 
 export function formatHealthResult(result: HealthResult): string {
-  const icon = result.status === "ok" ? "✓" : result.status === "timeout" ? "⏱" : "✗"
+  const icon = result.status === "ok" ? "OK" : result.status === "timeout" ? "TIMEOUT" : "ERR"
   const modelCount = result.models ? ` (${result.models.length} models)` : ""
-  const error = result.error ? ` — ${result.error}` : ""
+  const error = result.error ? ` - ${result.error}` : ""
   return `${icon} ${result.provider.name}: ${result.latencyMs}ms${modelCount}${error}`
 }

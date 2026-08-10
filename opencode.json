@@ -177,6 +177,18 @@
           "name": "GLM-5.2"
         }
       }
+    },
+    "tokenrouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TokenRouter",
+      "options": {
+        "baseURL": "https://api.tokenrouter.com/v1"
+      },
+      "models": {
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+          "name": "nemotron-3-nano-omni-30b-a3b-reasoning:free"
+        }
+      }
     }
   }
 }

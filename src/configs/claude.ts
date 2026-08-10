@@ -23,8 +23,13 @@ export interface ClaudeSettings {
   apiKeyHelper?: string
 }
 
+function shellQuote(value: string): string {
+  return `'${value.replace(/'/g, "'\\''")}'`
+}
+
 export function generateClaudeEnvVars(
   providers: Array<{ provider: Provider; health: HealthResult }>,
+  apiKeys: Record<string, string> = {},
 ): string {
   const lines: string[] = []
   lines.push("# Claude Code Provider Configuration")
@@ -40,9 +45,12 @@ export function generateClaudeEnvVars(
     } else {
       lines.push(`export ANTHROPIC_BASE_URL="${provider.baseURL.replace(/\/v1$/, "")}"`)
     }
-    const envKey = provider.envKey || 'ANTHROPIC_API_KEY'
-    lines.push(`export ANTHROPIC_API_KEY="\${${envKey}}"`)
-    lines.push(`export ${envKey}="your-api-key-here"`)
+    if (provider.envKey) {
+      lines.push(`export ANTHROPIC_API_KEY="\${${provider.envKey}}"`)
+      if (apiKeys[provider.id]) {
+        lines.push(`export ${provider.envKey}=${shellQuote(apiKeys[provider.id])}`)
+      }
+    }
 
     if (health.models && health.models.length > 0) {
       const model = health.models[0]
@@ -67,7 +75,10 @@ export function generateClaudeSettingsJson(
     ANTHROPIC_BASE_URL: p.provider.apiType === "anthropic"
       ? p.provider.baseURL
       : p.provider.baseURL.replace(/\/v1$/, ""),
-    ANTHROPIC_API_KEY: `$\{${p.provider.envKey || "ANTHROPIC_API_KEY"}}`,
+  }
+
+  if (p.provider.envKey) {
+    settings.ANTHROPIC_API_KEY = `$\{${p.provider.envKey}}`
   }
 
   if (p.health.models && p.health.models.length > 0) {
