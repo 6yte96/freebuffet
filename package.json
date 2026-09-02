@@ -1,7 +1,7 @@
 {
   "name": "freebuffet",
-  "version": "0.1.1",
-  "description": "All-you-can-eat LLM providers — set up 165+ providers for OpenCode, Codex CLI, and Claude Code",
+  "version": "0.2.0",
+  "description": "All-you-can-eat LLM providers — 165+ providers, health checks, agent configs, and free credit relay sites",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,6 +29,10 @@
     "./configs": {
       "types": "./dist/configs/index.d.ts",
       "default": "./dist/configs/index.js"
+    },
+    "./welfare": {
+      "types": "./dist/welfare.d.ts",
+      "default": "./dist/welfare.js"
     }
   },
   "scripts": {
@@ -53,7 +57,10 @@
     "codex",
     "claude-code",
     "antigravity",
-    "ai-coding-agent"
+    "ai-coding-agent",
+    "free-credits",
+    "relay",
+    "welfare"
   ],
   "license": "MIT",
   "author": {
@@ -77,6 +84,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/node": "^26.4.1",
     "typescript": "^5.7.0"
   }
 }

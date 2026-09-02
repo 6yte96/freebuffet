@@ -21,6 +21,17 @@ import {
 } from "./configs/opencode"
 import { generateCodexConfig, generateCodexEnvVars } from "./configs/codex"
 import { generateClaudeEnvVars, generateClaudeSettingsJson } from "./configs/claude"
+import {
+  loadWelfareSites,
+  creditPlan,
+  formatCredits,
+  breakdown,
+  perDay,
+  usdTotals,
+  welfareSummary,
+  type WelfareSite,
+  type CreditPlan,
+} from "./welfare"
 
 function readJsonFile<T>(path: string): T | null {
   if (!existsSync(path)) return null
@@ -174,11 +185,11 @@ function padAnsiEnd(value: string, width: number): string {
   return value + " ".repeat(Math.max(0, width - visible))
 }
 
-type HomeAction = "saved" | "providers" | "browse" | "keys"
+type HomeAction = "saved" | "providers" | "browse" | "keys" | "welfare"
 
 const HOME_ACTION_SENTINEL_PREFIX = "__freebuffet_home__:"
 let navSavedProviderCount = 0
-const NAV_PROMPT_HELP = "global: /1 saved | /2 providers | /3 browse | /4 keys"
+const NAV_PROMPT_HELP = "global: /1 saved | /2 providers | /3 browse | /4 keys | /5 welfare"
 
 function setNavSavedProviderCount(count: number): void {
   navSavedProviderCount = count
@@ -189,11 +200,12 @@ function homeActionFromKey(value: string): HomeAction | null {
   if (value === "2") return "providers"
   if (value === "3") return "browse"
   if (value === "4") return "keys"
+  if (value === "5") return "welfare"
   return null
 }
 
 function homeActionFromSlashCommand(value: string): HomeAction | null {
-  const match = value.trim().match(/^\/([1-4])$/)
+  const match = value.trim().match(/^\/([1-5])$/)
   return match ? homeActionFromKey(match[1]) : null
 }
 
@@ -204,7 +216,7 @@ function homeActionSentinel(action: HomeAction): string {
 function parseHomeActionSentinel(value: string): HomeAction | null {
   if (!value.startsWith(HOME_ACTION_SENTINEL_PREFIX)) return null
   const action = value.slice(HOME_ACTION_SENTINEL_PREFIX.length)
-  return action === "saved" || action === "providers" || action === "browse" || action === "keys" ? action : null
+  return action === "saved" || action === "providers" || action === "browse" || action === "keys" || action === "welfare" ? action : null
 }
 
 function renderNavBar(active?: HomeAction): void {
@@ -213,6 +225,7 @@ function renderNavBar(active?: HomeAction): void {
     { action: "providers", key: "2", label: "providers" },
     { action: "browse", key: "3", label: "browse" },
     { action: "keys", key: "4", label: "keys" },
+    { action: "welfare", key: "5", label: "welfare" },
   ]
   const nav = items.map(item => {
     const label = ` ${item.key} ${item.label} `
@@ -229,6 +242,7 @@ function activeNavFromTitle(title: string): HomeAction | undefined {
   if (normalized.includes("provider") && !normalized.includes("browse")) return "providers"
   if (normalized.includes("browse")) return "browse"
   if (normalized.includes("key")) return "keys"
+  if (normalized.includes("welfare") || normalized.includes("free credits")) return "welfare"
   return undefined
 }
 
@@ -835,6 +849,149 @@ async function manageSavedKeysView(config: LocalConfig | null, providers: Provid
   }
 }
 
+function renderWelfareSiteRow(site: WelfareSite, plan: CreditPlan, active: boolean, width: number): string {
+  const pointer = active ? ">" : " "
+  const name = truncate(site.name, Math.floor(width * 0.22))
+  const firstDay = formatCredits(plan.firstDay, plan.approx, plan.unit) ?? "-"
+  const daily = perDay(plan) ?? "-"
+  const rec = site.recommended ? nord.badgeFree(" rec ") : ""
+  const line = `${pointer} ${padAnsiEnd(nord.snow(name), Math.floor(width * 0.22))} ${padAnsiEnd(nord.frost(firstDay), 10)} ${padAnsiEnd(nord.textMuted(daily), 18)} ${rec} ${nord.textMuted(truncate(site.subtitle, width - 70))}`
+  return active ? nord.active(line) + "\n" : line + "\n"
+}
+
+async function welfareSitesView(): Promise<HomeAction | null> {
+  const sites = loadWelfareSites()
+  const plans = sites.map(s => creditPlan(s))
+  const totals = usdTotals(plans)
+  let cursor = 0
+  let scroll = 0
+
+  const render = () => {
+    const rows = Math.max(8, (process.stdout.rows ?? 24) - 11)
+    if (cursor >= sites.length) cursor = Math.max(0, sites.length - 1)
+    if (cursor < 0) cursor = 0
+    if (cursor < scroll) scroll = cursor
+    if (cursor >= scroll + rows) scroll = cursor - rows + 1
+    const visible = sites.slice(scroll, scroll + rows)
+    const width = terminalWidth()
+
+    clearScreen()
+    renderTitle("Free credits from relay sites", `${sites.length} sites`, "welfare")
+    process.stdout.write(`${nord.snow("Register on relay/proxy stations for free API credits to use with Claude Code, Codex, and other agents.")}\n\n`)
+    process.stdout.write(`${nord.blue("total first-day (USD)")} ~$${totals.total} across ${totals.count} USD-denominated sites\n`)
+    const others = plans.filter(p => p.unit !== "usd" && p.firstDay != null)
+    if (others.length > 0) {
+      for (const p of others) {
+        process.stdout.write(`${nord.blue(p.name ?? "")} ${formatCredits(p.firstDay, p.approx, p.unit)} points\n`)
+      }
+    }
+    process.stdout.write("\n")
+
+    for (let i = 0; i < visible.length; i++) {
+      process.stdout.write(renderWelfareSiteRow(visible[i], plans[scroll + i], scroll + i === cursor, width))
+    }
+
+    const rule = nord.textMuted("━".repeat(width))
+    process.stdout.write(`\n${rule}\n`)
+    process.stdout.write(`${nord.blue("up/down")} move  ${nord.blue("enter")} details  ${nord.blue("w")} open site  ${nord.blue("1-4")} switch  ${nord.blue("esc")} back\n`)
+    process.stdout.write(`${nord.textMuted(NAV_PROMPT_HELP)}\n`)
+  }
+
+  if (!process.stdin.isTTY || !process.stdout.isTTY) {
+    // Fallback: list all sites
+    for (const site of sites) {
+      const plan = creditPlan(site)
+      const firstDay = formatCredits(plan.firstDay, plan.approx, plan.unit) ?? "-"
+      console.log(`${site.name}: ${firstDay} — ${site.subtitle}`)
+      console.log(`  Sign up: ${site.signupUrl}`)
+      if (site.endpoints.anthropic) console.log(`  Anthropic: ${site.endpoints.anthropic}`)
+      if (site.endpoints.openai) console.log(`  OpenAI: ${site.endpoints.openai}`)
+      console.log("")
+    }
+    return null
+  }
+
+  enableRawInput()
+  return await new Promise<HomeAction | null>((resolve) => {
+    const cleanup = () => {
+      process.stdin.off("keypress", onWelfareKeypress)
+      disableRawInput()
+    }
+
+    const onWelfareKeypress = (str: string, key: readline.Key) => {
+      if (key.ctrl && key.name === "c") {
+        cleanup()
+        exitCancelled()
+      }
+      const navAction = homeActionFromKey(str)
+      if (navAction) {
+        cleanup()
+        resolve(navAction)
+        return
+      }
+      if (isEscapeKey(str, key)) {
+        cleanup()
+        resolve(null)
+        return
+      }
+      if (key.name === "up") cursor = Math.max(0, cursor - 1)
+      else if (key.name === "down") cursor = Math.min(sites.length - 1, cursor + 1)
+      else if (key.name === "w" && sites[cursor]) {
+        openUrl(sites[cursor].signupUrl)
+      } else if (key.name === "return" && sites[cursor]) {
+        const site = sites[cursor]
+        const plan = creditPlan(site)
+        cleanup()
+        // Show site details
+        showWelfareSiteDetails(site, plan).then(subAction => {
+          resolve(subAction)
+        })
+        return
+      }
+      render()
+    }
+
+    render()
+    process.stdin.on("keypress", onWelfareKeypress)
+  })
+}
+
+async function showWelfareSiteDetails(site: WelfareSite, plan: CreditPlan): Promise<HomeAction | null> {
+  while (true) {
+    const bd = breakdown(plan) ?? "-"
+    const pd = perDay(plan) ?? "-"
+    const answer = await promptLineView(
+      "Welfare site details",
+      "Choose action:",
+      [
+        `${nord.blue("site")} ${site.name}`,
+        `${nord.blue("subtitle")} ${site.subtitle}`,
+        `${nord.blue("first-day")} ${bd}`,
+        `${nord.blue("daily")} ${pd}`,
+        `${nord.blue("signup")} ${site.signupUrl}`,
+        site.endpoints.anthropic ? `${nord.blue("anthropic")} ${site.endpoints.anthropic}` : "",
+        site.endpoints.openai ? `${nord.blue("openai")} ${site.endpoints.openai}` : "",
+        "",
+        `${nord.blue("1")} Open signup page`,
+        `${nord.blue("2")} Open docs`,
+        `${nord.blue("3")} Back to welfare list`,
+      ].filter(Boolean),
+      "1",
+    )
+    const navAction = parseHomeActionSentinel(answer)
+    if (navAction) return navAction
+    if (answer === "1" || answer === "") {
+      openUrl(site.signupUrl)
+      continue
+    }
+    if (answer === "2" && site.docsUrl) {
+      openUrl(site.docsUrl)
+      continue
+    }
+    if (answer === "3" || answer.toLowerCase() === "back") return null
+  }
+}
+
 async function browseProvidersView(providers: Provider[], recommendedSet: Set<string>, savedKeySet: Set<string>): Promise<HomeAction | null> {
   const selected = await selectProvidersSearchable(
     providers,
@@ -871,6 +1028,7 @@ async function selectHomeAction(savedProviderCount: number): Promise<HomeAction>
     { action: "providers", key: "2", label: "providers" },
     { action: "browse", key: "3", label: "browse" },
     { action: "keys", key: "4", label: "keys" },
+    { action: "welfare", key: "5", label: "welfare (free credits)" },
   ]
   let cursor = savedProviderCount > 0 ? 0 : 1
 
@@ -886,7 +1044,7 @@ async function selectHomeAction(savedProviderCount: number): Promise<HomeAction>
     renderTitle("FreeBuffet", "home", items[cursor]?.action)
     process.stdout.write(`${nord.snow("Setup coding agents from free and saved LLM providers.")}\n\n`)
     process.stdout.write(`${nord.blue("saved providers")} ${savedProviderCount}\n`)
-    process.stdout.write(`${nord.textMuted("Use 1-4 to switch views. Arrow keys and Enter also work on this screen.")}\n`)
+    process.stdout.write(`${nord.textMuted("Use 1-5 to switch views. Arrow keys and Enter also work on this screen.")}\n`)
   }
 
   enableRawInput()
@@ -913,7 +1071,7 @@ async function selectHomeAction(savedProviderCount: number): Promise<HomeAction>
       else if (key.name === "return") {
         choose(cursor)
         return
-      } else if (str >= "1" && str <= "4") {
+      } else if (str >= "1" && str <= "5") {
         choose(Number(str) - 1)
         return
       }
@@ -1183,10 +1341,15 @@ async function main() {
           providerPickerTitle = "All model listing"
           providerPickerHelp = "/ search | select saved-key providers | up/down move | space select | enter confirm | 1-4 switch | esc back | ctrl+c exit"
           break
-        }
+        }        continue
+      }
+      if (choice === "welfare") {
+        const action = await welfareSitesView()
+        if (action) forcedHomeAction = action
         continue
       }
     }
+
 
     providerSetup:
     while (true) {

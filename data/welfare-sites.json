@@ -1,0 +1,534 @@
+{
+  "sites": [
+    {
+      "id": "agentrouter",
+      "name": "AgentRouter",
+      "subtitle": "AI Coding public welfare site. Sign up for free credits, daily check-in to keep them going",
+      "recommended": true,
+      "credits": {
+        "signup": 100,
+        "invite": 50,
+        "dailyCheckin": 25,
+        "approx": false
+      },
+      "signupUrl": "https://agentrouter.org/register?aff=szt3",
+      "homeUrl": "https://agentrouter.org",
+      "docsUrl": "https://agentrouter.org/docs/index.html",
+      "statusApi": "https://agentrouter.org/api/status",
+      "pricingApi": "https://agentrouter.org/api/pricing",
+      "mirrors": [
+        {
+          "label": "China mirror",
+          "homeUrl": "https://ps.air-outer.com",
+          "signupUrl": "https://ps.air-outer.com/register?aff=szt3"
+        }
+      ],
+      "tags": ["public-welfare", "free-credits", "claude-code", "codex", "anthropic-compatible"],
+      "highlights": [
+        "$100 on sign-up, $50 more from this page's invite link, no credit card needed",
+        "Daily check-in gives $25 more — first day up to $175 total",
+        "Both Anthropic and OpenAI protocols supported — Claude Code / Codex / Cline / Cursor all work",
+        "Official docs cover 10+ clients with copy-paste configs"
+      ],
+      "endpoints": {
+        "anthropic": "https://agentrouter.org",
+        "openai": "https://agentrouter.org/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth", "LinuxDO OAuth"],
+        "requirements": [
+          "Must register from this page's invite link to receive invite credits",
+          "Log out and log back in after registration for credits to appear"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in for credits (click check-in in the dashboard)",
+        "Bind email for periodic lottery codes",
+        "Invite others — you both get credits"
+      ],
+      "caveats": [
+        "Public welfare site — no SLA guarantee, no paid top-up; upstream may temporarily disable models",
+        "Only supports Chinese / English / French / German / Russian content — other languages return 400",
+        "No bulk registration, farming, resale, or fake invites — accounts will be banned"
+      ],
+      "community": [
+        "Discord: https://discord.gg/aYq5B4RW3",
+        "X: https://x.com/AgentRouter_0"
+      ]
+    },
+    {
+      "id": "justdowork",
+      "name": "JustDoWork",
+      "subtitle": "New API relay. GitHub one-click login, daily check-in, drawing support",
+      "recommended": false,
+      "credits": {
+        "signup": 70,
+        "invite": null,
+        "dailyCheckin": 22,
+        "approx": true
+      },
+      "signupUrl": "https://api.justwoker.icu/sign-up?aff=VTrz",
+      "homeUrl": "https://api.justwoker.icu",
+      "docsUrl": "https://api.justwoker.icu/dashboard/overview",
+      "statusApi": "https://api.justwoker.icu/api/status",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["new-api", "free-credits", "check-in", "openai-compatible"],
+      "highlights": [
+        "About $70 on sign-up via GitHub login, no payment needed",
+        "Built on open-source New API panel — familiar dashboard with logs and usage",
+        "Daily check-in gives about $22 — first day about $92 total",
+        "Supports drawing and async task endpoints beyond chat",
+        "One-click push Key to Cherry Studio, DeepChat, CC Switch and other clients"
+      ],
+      "endpoints": {
+        "anthropic": "https://api.justwoker.icu",
+        "openai": "https://api.justwoker.icu/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth"],
+        "requirements": [
+          "Email/password registration disabled — GitHub OAuth only",
+          "GitHub account must be at least 365 days old",
+          "Cloudflare Turnstile captcha on registration page",
+          "Must use this page's invite link for invite credits"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in for about $22",
+        "Watch site announcements for promo codes"
+      ],
+      "caveats": [
+        "Model list and pricing require login to view",
+        "Relay upstream may change at any time — verify on the site"
+      ],
+      "community": []
+    },
+    {
+      "id": "kktoken",
+      "name": "KKtoken AI",
+      "subtitle": "New API relay. $75 on sign-up, $25 from this page's invite, per-token billing at $1/M",
+      "recommended": false,
+      "credits": {
+        "signup": 75,
+        "invite": 25,
+        "dailyCheckin": 20,
+        "approx": false
+      },
+      "signupUrl": "https://kktoken.cc/sign-up?aff=MzG9",
+      "homeUrl": "https://kktoken.cc",
+      "docsUrl": "https://kktoken.cc/dashboard/overview",
+      "statusApi": "https://kktoken.cc/api/status",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["new-api", "free-credits", "check-in", "per-token", "anthropic-compatible", "openai-compatible"],
+      "highlights": [
+        "$75 on sign-up, $25 from this page's invite, daily check-in $20 — first day $120",
+        "Per-token billing: $1/M input, $1/M output — cheaper for long conversations",
+        "Both Anthropic and OpenAI native routes open — Claude Code connects with just a Base URL",
+        "Check-in, drawing, and async task endpoints — New API v1.0.0-rc.25 panel"
+      ],
+      "endpoints": {
+        "anthropic": "https://kktoken.cc",
+        "openai": "https://kktoken.cc/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?aff=MzG9) — $25 credited at registration",
+          "GitHub account must be at least 365 days old",
+          "Email/password registration disabled — GitHub OAuth only",
+          "Cloudflare Turnstile captcha on registration page"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in for $20",
+        "Invite others for rewards (check dashboard invite page)"
+      ],
+      "caveats": [
+        "Credits are site-internal numbers — the API does not expose quota_for_new_user or quota_for_invitee",
+        "Model list and pricing require login to view",
+        "Supports online top-up ($1 ≈ ¥7.3, Stripe ¥8) — not purely free",
+        "Cloudflare-protected — CI/datacenter IPs may get blocked"
+      ],
+      "community": []
+    },
+    {
+      "id": "gorouter",
+      "name": "GoRouter",
+      "subtitle": "New API relay. $50 on sign-up, $20 from invite, cheapest per-request pricing",
+      "recommended": false,
+      "credits": {
+        "signup": 50,
+        "invite": 20,
+        "dailyCheckin": null,
+        "approx": false
+      },
+      "signupUrl": "https://gorouter.app/sign-up?aff=PZDx",
+      "homeUrl": "https://gorouter.app",
+      "docsUrl": null,
+      "statusApi": "https://gorouter.app/api/status",
+      "pricingApi": "https://gorouter.app/api/pricing",
+      "mirrors": [],
+      "tags": ["new-api", "free-credits", "claude-code", "anthropic-compatible", "per-request"],
+      "highlights": [
+        "$50 on sign-up, $20 from this page's invite — first day $70",
+        "Cheapest per-request: claude-opus-5 at $0.3/request, opus-4-8 at $0.2/request",
+        "Both Anthropic and OpenAI protocols open — Claude Code connects with Base URL",
+        "Daily check-in enabled for ongoing credits"
+      ],
+      "endpoints": {
+        "anthropic": "https://gorouter.app",
+        "openai": "https://gorouter.app/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?aff=PZDx) — $20 credited at registration",
+          "Email/password registration disabled — GitHub OAuth only",
+          "Cloudflare Turnstile captcha on registration page"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in in the dashboard",
+        "Invite others — $40 per successful invite (tested 2026-08-11)"
+      ],
+      "caveats": [
+        "Per-request, not per-token: $0.3/request for opus-5 — $70 ≈ 233 requests",
+        "Only Claude Opus models — no GPT / Gemini",
+        "Only one default group — no VIP switching",
+        "Supports online top-up — not purely free",
+        "Cloudflare-protected"
+      ],
+      "community": []
+    },
+    {
+      "id": "matrix",
+      "name": "Matrix",
+      "subtitle": "Unified API gateway + open-source app store. 600 points on invite, 2000 with ID verification",
+      "recommended": false,
+      "panel": "matrix",
+      "credits": {
+        "signup": null,
+        "invite": 600,
+        "dailyCheckin": null,
+        "approx": false,
+        "unit": "point"
+      },
+      "signupUrl": "https://matrix.mzsjai.com/login?redirect=%2Fapp%2Fgrowth%3FinviteCode%3DMXMRFO52KD2_",
+      "homeUrl": "https://matrix.mzsjai.com",
+      "docsUrl": "https://matrix.mzsjai.com/docs/quickstart",
+      "statusApi": "https://matrix.mzsjai.com/api/health",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["points", "free-credits", "openai-compatible", "app-store", "cursor"],
+      "highlights": [
+        "600 bonus points on invite registration — no ID or payment required",
+        "Complete ID verification for 2,000 more points",
+        "One Key for OpenAI / Anthropic / Google / DeepSeek / Moonshot / Zhipu / Alibaba models",
+        "Built-in open-source app store — launch container instances with your Matrix Key"
+      ],
+      "endpoints": {
+        "anthropic": null,
+        "openai": null
+      },
+      "setup": {
+        "client": "OpenAI compatible",
+        "note": "Gateway address is only shown on the API Key details page after login — cannot be pre-filled.",
+        "steps": [
+          "Register from this page's invite link and log in",
+          "Create an API Key in the dashboard — Token starts with mat- and shown only once",
+          "Fill Base URL = gateway address + /v1, API Key = mat- token, model name from the model list page"
+        ],
+        "dashboardUrl": "https://matrix.mzsjai.com/app/apikey"
+      },
+      "register": {
+        "methods": ["University ID", "Phone", "Email + Password"],
+        "requirements": [
+          "Must register from this page's invite link — 600 points only for new users",
+          "600 points credited immediately, 2,000 ID verification points claimed separately",
+          "One ID verification reward per user — no exceptions"
+        ]
+      },
+      "earnMore": [
+        "Complete ID verification for 2,000 points (one-time)",
+        "Invite friends — 600 points each for both parties",
+        "Submit feedback for exchange codes",
+        "Initial experience credits in wallet (not publicly disclosed)"
+      ],
+      "caveats": [
+        "Points are site-internal — no public USD conversion rate",
+        "Only OpenAI compatible protocol — no native Anthropic endpoint for Claude Code",
+        "App store containers are billed by spec x runtime — stop them when done",
+        "Growth campaign valid until 2026-12-31"
+      ],
+      "community": [
+        "Docs: https://matrix.mzsjai.com/docs/quickstart",
+        "Feedback: https://matrix.mzsjai.com/docs/contact"
+      ]
+    },
+    {
+      "id": "tabitoken",
+      "name": "TaBiAI",
+      "subtitle": "New API relay. $100 on sign-up, $20 from invite, Claude Opus only",
+      "recommended": false,
+      "credits": {
+        "signup": 100,
+        "invite": 20,
+        "dailyCheckin": null,
+        "approx": false
+      },
+      "signupUrl": "https://tabitoken.com/sign-up?aff=EQIT",
+      "homeUrl": "https://tabitoken.com",
+      "docsUrl": null,
+      "statusApi": "https://tabitoken.com/api/status",
+      "pricingApi": "https://tabitoken.com/api/pricing",
+      "mirrors": [],
+      "tags": ["new-api", "free-credits", "claude-code", "anthropic-compatible", "per-request"],
+      "highlights": [
+        "$100 on sign-up, $20 from this page's invite — first day $120",
+        "Both Anthropic and OpenAI protocols open — Claude Code connects with Base URL",
+        "Only Claude Opus 4 models — pricing API is public",
+        "Daily check-in enabled for ongoing credits"
+      ],
+      "endpoints": {
+        "anthropic": "https://tabitoken.com",
+        "openai": "https://tabitoken.com/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?aff=EQIT) — $20 credited at registration",
+          "Email/password registration disabled — GitHub OAuth only",
+          "Cloudflare Turnstile captcha on registration page"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in in the dashboard",
+        "Invite others (check dashboard invite page for amounts)"
+      ],
+      "caveats": [
+        "Per-request: opus-5 at $0.8, opus-4-8 at $0.5 — $120 ≈ 150 opus-5 requests",
+        "Only Claude Opus models — no GPT / Gemini",
+        "Supports online top-up — not purely free",
+        "Two model groups: default / VIP — availability varies"
+      ],
+      "community": []
+    },
+    {
+      "id": "rawchat",
+      "name": "RawChat Public Welfare",
+      "subtitle": "Codex public welfare. $50 daily quota pool, resets at midnight",
+      "recommended": false,
+      "panel": "vibecode",
+      "credits": {
+        "signup": null,
+        "invite": null,
+        "dailyCheckin": null,
+        "dailyQuota": 50,
+        "approx": false
+      },
+      "signupUrl": "https://new.sharedchat.cc/list/#/register?i=MaVP1",
+      "homeUrl": "https://new.sharedchat.cc/list/",
+      "docsUrl": null,
+      "statusApi": "https://new.sharedchat.cc/frontend-api/getConfig",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["public-welfare", "codex", "daily-reset", "free-credits"],
+      "highlights": [
+        "$50 daily quota pool — resets at midnight, no check-in or payment needed",
+        "Dedicated to Codex — copy one-click install script from dashboard",
+        "Email registration only — no GitHub age requirement, no captcha",
+        "Per-quota billing with 3-hour rolling window"
+      ],
+      "endpoints": {
+        "anthropic": null,
+        "openai": null
+      },
+      "setup": {
+        "client": "Codex CLI",
+        "note": "Base URL and API Key are issued after login — cannot be pre-filled. Use the one-click install script from the dashboard.",
+        "steps": [
+          "Register from this page's invite link and log in",
+          "Click 'Claim Codex Benefits' in the dashboard",
+          "Go to Tutorial → Codex → copy the install script for your platform"
+        ],
+        "dashboardUrl": "https://new.sharedchat.cc/list/#/vibe-code/dashboard"
+      },
+      "register": {
+        "methods": ["Email"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?i=MaVP1)",
+          "Email registration only — no GitHub / Google login",
+          "Click 'Claim Codex Benefits' after login for daily quota to activate"
+        ]
+      },
+      "earnMore": [
+        "Daily quota resets at midnight — no check-in needed",
+        "Invite others for bonus rewards"
+      ],
+      "caveats": [
+        "$50 daily pool — unused quota does not carry over",
+        "3-hour rolling window rate limit — shared pool, peak hours may show throttling",
+        "Codex only — for Claude Code use other sites on this page"
+      ],
+      "community": []
+    },
+    {
+      "id": "anyrouter",
+      "name": "AnyRouter",
+      "subtitle": "New API relay. $75 on sign-up, $50 from invite, daily check-in $25",
+      "recommended": false,
+      "credits": {
+        "signup": 75,
+        "invite": 50,
+        "dailyCheckin": 25,
+        "approx": false
+      },
+      "signupUrl": "https://anyrouter.top/register?aff=Z24N",
+      "homeUrl": "https://anyrouter.top",
+      "docsUrl": null,
+      "statusApi": "https://anyrouter.top/api/status",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["new-api", "free-credits", "check-in", "claude-code", "per-token", "anthropic-compatible", "openai-compatible"],
+      "highlights": [
+        "$75 on sign-up, $50 from this page's invite, daily check-in $25 — first day $150",
+        "Both Anthropic and OpenAI native routes open — Claude Code and Codex connect directly",
+        "Per-token billing: $5/M input, $25/M output",
+        "Supports GPT-5.6 Sol; LinuxDO login available if GitHub account < 5 years"
+      ],
+      "endpoints": {
+        "anthropic": "https://anyrouter.top",
+        "openai": "https://anyrouter.top/v1"
+      },
+      "register": {
+        "methods": ["GitHub OAuth", "LinuxDO OAuth"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?aff=Z24N) — $50 credited at registration",
+          "GitHub account must be at least 5 years old — or use LinuxDO login",
+          "Check-in credits require re-login to refresh"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in for $25 (re-login after to refresh credits)",
+        "Invite others (check dashboard invite page)"
+      ],
+      "caveats": [
+        "Entire site behind JS challenge — API may be blocked for datacenter IPs but works from home",
+        "Credits are site-internal numbers — verify in dashboard",
+        "GitHub 5-year requirement blocks many accounts — use LinuxDO if needed"
+      ],
+      "community": []
+    },
+    {
+      "id": "cheapcodex",
+      "name": "CheapCodex",
+      "subtitle": "Custom AI gateway. $20 from invite, daily check-in $20, triple protocol support",
+      "recommended": false,
+      "panel": "relay",
+      "credits": {
+        "signup": null,
+        "invite": 20,
+        "dailyCheckin": 20,
+        "approx": false
+      },
+      "signupUrl": "https://api.cheapcodex.online/register?aff=U7SSQZSDB36S",
+      "homeUrl": "https://api.cheapcodex.online",
+      "docsUrl": null,
+      "statusApi": "https://api.cheapcodex.online/v1/models",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["free-credits", "check-in", "codex", "claude-code", "openai-compatible", "anthropic-compatible"],
+      "highlights": [
+        "$20 from invite, daily check-in $20 — first day $40",
+        "Three native routes: OpenAI, Anthropic, and Codex responses protocol",
+        "Accepts three auth headers: Bearer, x-api-key, x-goog-api-key",
+        "Supports GPT-5.6 Sol"
+      ],
+      "endpoints": {
+        "anthropic": "https://api.cheapcodex.online",
+        "openai": "https://api.cheapcodex.online/v1"
+      },
+      "register": {
+        "methods": ["Email"],
+        "requirements": [
+          "Must register from this page's invite link — $20 credited at registration",
+          "Email registration only — all OAuth toggles are off",
+          "Cloudflare Turnstile captcha currently disabled"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in for $20",
+        "Invite others for rewards (affiliate_enabled=true)"
+      ],
+      "caveats": [
+        "Credits are site-internal — API robots.txt blocks /api access",
+        "Paid subscription available — not purely free"
+      ],
+      "community": []
+    },
+    {
+      "id": "nofx",
+      "name": "NOFX",
+      "subtitle": "Task-based points. Earn API points through check-in / Discord / invites / tweets",
+      "recommended": false,
+      "panel": "relay",
+      "credits": {
+        "signup": null,
+        "invite": 10,
+        "dailyCheckin": 5,
+        "approx": false,
+        "unit": "point"
+      },
+      "signupUrl": "https://nofx.one/zh-CN/sign-in?ref=J369GHY4",
+      "homeUrl": "https://nofx.one/zh-CN",
+      "docsUrl": null,
+      "statusApi": "https://nofx.one/sitemap.xml",
+      "pricingApi": null,
+      "mirrors": [],
+      "tags": ["points", "free-credits", "discord-checkin", "codex", "openai-compatible"],
+      "highlights": [
+        "10 points on invite, daily check-in +5 points — first 15 points",
+        "Earn points through tasks: Discord +5, check-in +5, invite +5, tweet +20",
+        "Passwordless login: email magic link or GitHub — no password stored",
+        "One Key for mainstream models — reportedly supports gpt-5.6-sol"
+      ],
+      "endpoints": {
+        "anthropic": null,
+        "openai": null
+      },
+      "setup": {
+        "client": "OpenAI compatible",
+        "note": "Base URL and Key are only available in the dashboard after login — cannot be pre-filled.",
+        "steps": [
+          "Register from this page's invite link and log in (email magic link or GitHub)",
+          "Complete tasks: /verify in Discord for +5, /checkin for daily +5",
+          "Create API Key, get Base URL from the API docs page"
+        ],
+        "dashboardUrl": "https://nofx.one/zh-CN/tasks"
+      },
+      "register": {
+        "methods": ["Email magic link", "GitHub OAuth"],
+        "requirements": [
+          "Must register from this page's invite link (带 ?ref=J369GHY4)",
+          "Passwordless login — email magic link or GitHub OAuth",
+          "Discord check-in and verify required for full credits"
+        ]
+      },
+      "earnMore": [
+        "Daily check-in +5 points (Discord /checkin)",
+        "Discord verify +5 points (one-time)",
+        "Invite friends +5 points each (unlimited daily)",
+        "Tweet with invite code +20 points (one-time)"
+      ],
+      "caveats": [
+        "Points are site-internal — no public USD conversion",
+        "Points expire after 30 days — use them or lose them",
+        "Check-in pauses when balance > $50",
+        "Base URL only available after login"
+      ],
+      "community": []
+    }
+  ]
+}
