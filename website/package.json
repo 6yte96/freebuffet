@@ -1,0 +1,24 @@
+{
+  "name": "freebuffet-landing",
+  "version": "0.2.0",
+  "private": true,
+  "description": "FreeBuffet landing page — Broadsheet editorial template, static export for GitHub Pages",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "next": "15.4.8",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}

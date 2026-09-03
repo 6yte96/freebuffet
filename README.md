@@ -10,6 +10,8 @@ npx freebuffet
 bunx freebuffet
 ```
 
+> 🍱 **Landing page:** the marketing site lives in [`website/`](./website) and is published to GitHub Pages at `https://6yte96.github.io/freebuffet/` — see [`website/README.md`](./website/README.md).
+
 ---
 
 ## Features
@@ -149,6 +151,9 @@ freebuffet/
 │       ├── codex.ts          # ~/.codex/config.toml generator
 │       ├── claude.ts         # Claude Code settings + env vars
 │       └── antigravity.ts    # Experimental Antigravity CLI config generator
+├── website/                  # Landing page (Next.js static export → GitHub Pages)
+│   ├── project.config.ts     # All landing page content — edit this one file
+│   └── src/                 # Broadsheet template components
 ├── scripts/
 │   ├── sync-modelscope-models.py
 │   └── opencode-with-modelscope

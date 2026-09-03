@@ -1,5 +1,11 @@
 node_modules/
 dist/
-bun.lock
+/bun.lock
 *.swp
 *.bak
+
+# Landing page (Next.js static export)
+website/.next/
+website/out/
+website/next-env.d.ts
+website/*.tsbuildinfo

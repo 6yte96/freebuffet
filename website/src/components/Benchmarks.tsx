@@ -1,0 +1,73 @@
+import { PROJECT_CONFIG } from "@/config";
+
+export function Benchmarks() {
+  const { benchmarks } = PROJECT_CONFIG;
+
+  return (
+    <section id="benchmarks" className="projects-section" style={{ paddingTop: "1rem" }}>
+      <div className="section-header">
+        <div className="section-header-left">
+          <div className="section-label-mono">Section IV</div>
+          <h2 className="section-title">{benchmarks.title}</h2>
+          <p className="section-description">{benchmarks.subtitle}</p>
+        </div>
+
+        <div className="section-header-right label-mono">
+          Pp. 12 — 15
+          <br />
+          Telemetry Run
+        </div>
+      </div>
+
+      <div className="benchmark-table-wrapper">
+        <table className="benchmark-table">
+          <thead>
+            <tr>
+              {benchmarks.headers.map((header, idx) => (
+                <th key={idx}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {benchmarks.rows.map((row, idx) => (
+              <tr
+                key={idx}
+                className={row.highlight ? "highlight-row" : ""}
+              >
+                <td>
+                  <strong>{row.name}</strong>
+                  {row.isTarget && (
+                    <span className="benchmark-badge-best">LEADING</span>
+                  )}
+                </td>
+                {row.metrics.map((metric, mIdx) => (
+                  <td key={mIdx}>{metric}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "1rem",
+          marginTop: "0.75rem",
+        }}
+        className="font-mono text-xs text-muted-foreground"
+      >
+        <span>
+          METHODOLOGY // 1,000,000 randomized payloads (512B each) under sustained concurrent load.
+        </span>
+        <span className="telemetry-pill">
+          <span style={{ color: "#10b981" }}>●</span>
+          <span>Verified Deterministic</span>
+        </span>
+      </div>
+    </section>
+  );
+}
