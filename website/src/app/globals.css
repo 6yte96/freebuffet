@@ -7787,8 +7787,7 @@ body.sponsor-banner-visible .main {
 }
 
 /* Broadsheet Explicit Button Utilities */
-.btn-primary,
-.btn-broadsheet-primary {
+.btn-primary,.btn-broadsheet-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7841,3 +7840,8 @@ body.sponsor-banner-visible .main {
   background: var(--surface) !important;
   color: var(--ink) !important;
 }
+
+/* Spacing utilities (used by icon/text pairs in components) */
+.mr-1 { margin-right: 0.25rem; }
+.mr-2 { margin-right: 0.5rem; }
+.ml-1 { margin-left: 0.25rem; }

@@ -57,8 +57,11 @@ export interface ProjectConfig {
     title: string;
     description: string;
     repoLinkText?: string;
-    impressions: string;
-    stars: string;
+    stamp: {
+      label: string;
+      value: string;
+    };
+    meta: string;
     tilt: "tilt-up" | "tilt-down";
   }[];
   codePlayground: {
@@ -99,6 +102,17 @@ export interface ProjectConfig {
     description: string;
     tag: string;
   }[];
+  community: {
+    title: string;
+    description: string;
+    contributingText: string;
+    dispatches: {
+      title: string;
+      tag: string;
+      component: string;
+      href: string;
+    }[];
+  };
   links: {
     github: string;
     docs: string;
@@ -187,8 +201,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "A hand-curated registry with baseURLs, env keys, free-tier quotas, and API types. Groq, Cerebras, Gemini, OpenRouter, Ollama — every entry searchable by name or id, filterable by tag.",
       repoLinkText: "src/providers.ts",
-      impressions: "2,006",
-      stars: "165★",
+      stamp: { label: "Lines of code", value: "1,691" },
+      meta: "165 ENTRIES",
       tilt: "tilt-up",
     },
     {
@@ -200,8 +214,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Pings /v1/models or /v1/messages per provider, measures latency, and discovers the live model list before a single config is written. Unhealthy providers never make it to your agent.",
       repoLinkText: "src/health.ts",
-      impressions: "1,842",
-      stars: "99★",
+      stamp: { label: "Lines of code", value: "167" },
+      meta: "401/403 AWARE",
       tilt: "tilt-down",
     },
     {
@@ -213,8 +227,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "API keys are sealed in ~/.config/freebuffet/config.enc with a machine-bound scrypt key. No plaintext, no cloud, no telemetry — keys never leave your box.",
       repoLinkText: "src/config.ts",
-      impressions: "1,564",
-      stars: "47★",
+      stamp: { label: "Lines of code", value: "59" },
+      meta: "MACHINE-BOUND",
       tilt: "tilt-up",
     },
     {
@@ -226,8 +240,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Generates opencode.json, ~/.codex/config.toml, ~/.claude/settings.json — plus experimental Antigravity support — from a single provider selection. Existing files are backed up, never clobbered.",
       repoLinkText: "src/configs/",
-      impressions: "2,410",
-      stars: "19★",
+      stamp: { label: "Lines of code", value: "458" },
+      meta: "4 TARGETS",
       tilt: "tilt-down",
     },
     {
@@ -239,8 +253,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Zero-cost local inference: Ollama, LM Studio, llama.cpp, vLLM, SGLang, and 14 more. Key prompts auto-skipped.",
       repoLinkText: "LOCALHOST / $0",
-      impressions: "1,203",
-      stars: "25★",
+      stamp: { label: "Local engines", value: "19" },
+      meta: "NO KEY NEEDED",
       tilt: "tilt-up",
     },
     {
@@ -252,8 +266,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "A registry of public-welfare relay stations handing out free Claude/GPT credits — $50–$100 signup bonuses, daily check-ins, invite stacking. FreeBuffet probes their live status and calculates your first-day total.",
       repoLinkText: "data/welfare-sites.json",
-      impressions: "1,990",
-      stars: "10★",
+      stamp: { label: "Relay sites", value: "10" },
+      meta: "DAILY CHECK-INS",
       tilt: "tilt-down",
     },
     {
@@ -265,8 +279,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "The editor's picks: capability tags — coding, reasoning, vision, fast, free, no-cc — so you pick a provider in seconds, not settings tabs.",
       repoLinkText: "CURATED_FAVORITES",
-      impressions: "1,388",
-      stars: "25★",
+      stamp: { label: "Curated picks", value: "25" },
+      meta: "6 CAPABILITY TAGS",
       tilt: "tilt-up",
     },
     {
@@ -278,8 +292,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Type-to-filter provider checklist, live health-check spinners, config preview before write. Runs on Node 18+ and Bun — one runtime dep (picocolors), zero native modules.",
       repoLinkText: "src/index.ts",
-      impressions: "1,693",
-      stars: "TS★",
+      stamp: { label: "Lines of code", value: "1,693" },
+      meta: "1 RUNTIME DEP",
       tilt: "tilt-down",
     },
   ],
@@ -396,14 +410,19 @@ stream_idle_timeout_ms = 120000
   "env": {
     "ANTHROPIC_BASE_URL": "https://router.huggingface.co",
     "ANTHROPIC_API_KEY": "\${HF_TOKEN}",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "zai-72b",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "zai-72b",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "zai-72b",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "zai-72b"
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "<first model from health check>",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "<first model from health check>",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<first model from health check>",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "<first model from health check>"
   }
 }
 
-# Plus ~/.claude/env.sh — ready-to-source exports:
+// generateClaudeSettingsJson() uses your first healthy provider:
+//   baseURL minus trailing /v1 → ANTHROPIC_BASE_URL
+//   envKey → \${ENV_VAR} reference — never a literal key
+//   health.models[0] → fills all four model slots
+//
+// Plus ~/.claude/env.sh — ready-to-source exports:
 #   export HF_TOKEN='hf_••••••••••••••••••'
 #   export ANTHROPIC_BASE_URL="https://router.huggingface.co"`,
       },
@@ -484,7 +503,7 @@ stream_idle_timeout_ms = 120000
   },
   architecture: {
     title: "The Buffet Line, Mapped",
-    subtitle: "Section V · Source Layout & Data Flow — 3,610 lines of TypeScript, zero native deps",
+    subtitle: "Section V · Source Layout & Data Flow — 4,985 lines of TypeScript, zero native deps",
     layers: [
       {
         name: "Layer 0: Provider Registry",
@@ -504,12 +523,12 @@ stream_idle_timeout_ms = 120000
       {
         name: "Layer 3: Config Generators",
         role: "Health-gated generators emit OpenCode auth + config, Codex TOML, Claude settings/env, and experimental Antigravity entries. Existing files get timestamped backups.",
-        spec: "src/configs/*.ts · JSON / TOML / shell emitters",
+        spec: "src/configs/*.ts · 458 LOC · JSON / TOML / shell emitters",
       },
       {
         name: "Layer 4: Welfare Registry",
         role: "Free-credit relay sites with signup/invite/daily credit math, live status probing, snapshot diffing, and Cloudflare-block graceful merge.",
-        spec: "src/welfare.ts · data/welfare-sites.json · 10 stations",
+        spec: "src/welfare.ts · 917 LOC · data/welfare-sites.json · 10 stations",
       },
     ],
   },
@@ -533,12 +552,45 @@ stream_idle_timeout_ms = 120000
     {
       version: "v0.1.0",
       date: "June 2026",
-      title: "First Service: 100 Providers, Encrypted Keys",
+      title: "First Service: 114 Providers, Encrypted Keys",
       description:
-        "Initial release — multi-provider setup CLI with health checks, AES-256-GCM key persistence, curated free-coding favorites, and config generation for OpenCode, Codex, and Claude Code.",
+        "Initial release — multi-provider setup CLI with health checks, AES-256-GCM key persistence, and config generation for OpenCode, Codex, and Claude Code.",
       tag: "INAUGURAL",
     },
   ],
+  community: {
+    title: "Contribute to the Menu",
+    description:
+      "Add a provider, improve the health check, or wire up a new agent target. The registry is data-driven — every improvement ships from this repository.",
+    contributingText:
+      "All development happens publicly on GitHub. Adding a provider is one typed object in src/providers.ts; the health check, config generators, and TUI follow the same pattern. Run bun run dev to try changes locally.",
+    dispatches: [
+      {
+        title: "Publish freebuffet@0.2.0 to the npm registry",
+        tag: "RELEASE",
+        component: "package.json",
+        href: "https://www.npmjs.com/package/freebuffet",
+      },
+      {
+        title: "Per-provider model count display during health check",
+        tag: "ROADMAP",
+        component: "src/health.ts",
+        href: "https://github.com/6yte96/freebuffet/blob/main/src/health.ts",
+      },
+      {
+        title: "Add a \"refresh config\" command to re-fetch models",
+        tag: "ROADMAP",
+        component: "src/configs/",
+        href: "https://github.com/6yte96/freebuffet/tree/main/src/configs",
+      },
+      {
+        title: "More providers as new free/cheap services emerge",
+        tag: "ROADMAP",
+        component: "src/providers.ts",
+        href: "https://github.com/6yte96/freebuffet/blob/main/src/providers.ts",
+      },
+    ],
+  },
   links: {
     github: "https://github.com/6yte96/freebuffet",
     docs: "https://github.com/6yte96/freebuffet#readme",

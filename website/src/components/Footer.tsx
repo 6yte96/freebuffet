@@ -87,10 +87,20 @@ export function Footer() {
 
       <div className="footer-bottom">
         <p>
-          &copy; {currentYear} {brand.name} Contributors. Distributed under the MIT
-          License. Built with <i className="fas fa-heart"></i> for open source.
+          &copy; {currentYear} {brand.name} Contributors.
         </p>
-        <p className="footer-version">Broadsheet Edition 2026-A // @{brand.handle}</p>
+        <p className="footer-version">
+          <a
+            href="https://github.com/6yte96/freebuffet/blob/main/LICENSE"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            MIT License
+          </a>
+          {" // "}
+          v0.2.0 // @{brand.handle}
+        </p>
       </div>
     </footer>
   );

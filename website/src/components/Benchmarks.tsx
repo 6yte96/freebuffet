@@ -61,11 +61,11 @@ export function Benchmarks() {
         className="font-mono text-xs text-muted-foreground"
       >
         <span>
-          METHODOLOGY // 1,000,000 randomized payloads (512B each) under sustained concurrent load.
+          METHODOLOGY // quotas transcribed verbatim from the freeTier field of src/providers.ts
         </span>
         <span className="telemetry-pill">
           <span style={{ color: "#10b981" }}>●</span>
-          <span>Verified Deterministic</span>
+          <span>Registry Verified</span>
         </span>
       </div>
     </section>

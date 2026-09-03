@@ -10,7 +10,8 @@ export function Changelog() {
           <div className="section-label-mono">Section VI</div>
           <h2 className="section-title">Release Dispatches</h2>
           <p className="section-description">
-            Chronological ledger of engine improvements, security audits, and protocol upgrades.
+            Chronological ledger of releases — registry growth, workflow
+            improvements, and new capabilities — mined from the git history.
           </p>
         </div>
 

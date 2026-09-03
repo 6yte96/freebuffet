@@ -131,7 +131,7 @@ export function FeatureBento() {
                   <div className="postcard-meta-line">
                     <span>@{brand.handle}</span>
                     <span>·</span>
-                    <span>{feat.stars}</span>
+                    <span>{feat.meta}</span>
                     <span>·</span>
                     <time dateTime="2026-09-01">2026 EDITION</time>
                   </div>
@@ -161,10 +161,10 @@ export function FeatureBento() {
 
                   <div
                     className="postcard-impressions-stamp"
-                    title={`${feat.impressions} impressions`}
+                    title={`${feat.stamp.label}: ${feat.stamp.value}`}
                   >
-                    <span>Impressions</span>
-                    <strong>{feat.impressions}</strong>
+                    <span>{feat.stamp.label}</span>
+                    <strong>{feat.stamp.value}</strong>
                   </div>
                 </div>
               </div>
