@@ -2,21 +2,21 @@ import {
   generateOpenCodeConfig as genOpenCode,
   serializeOpenCodeConfig as serializeOpenCode,
   getOpenCodeConfigPath as getOpenCodePath,
-} from "./opencode"
+} from "./opencode.js"
 import {
   generateCodexConfig as genCodex,
   generateCodexEnvVars as genCodexEnv,
   getCodexConfigPath as getCodexPath,
-} from "./codex"
+} from "./codex.js"
 import {
   generateClaudeEnvVars as genClaudeEnv,
   generateClaudeSettingsJson as genClaudeSettings,
   getClaudeConfigPaths as getClaudePaths,
-} from "./claude"
+} from "./claude.js"
 import {
   generateAntigravityConfig as genAntigravity,
   getAntigravityConfigPath as getAntigravityPath,
-} from "./antigravity"
+} from "./antigravity.js"
 
 export const generateOpenCodeConfig = genOpenCode
 export const serializeOpenCodeConfig = serializeOpenCode

@@ -25,7 +25,7 @@ async function checkOpenAICompatible(
   try {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "User-Agent": "freebuffet/0.1.1",
+      "User-Agent": "freebuffet/0.2.0",
     }
     if (apiKey) headers["Authorization"] = `Bearer ${apiKey}`
 
@@ -88,7 +88,7 @@ async function checkAnthropicCompatible(
   try {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
-      "User-Agent": "freebuffet/0.1.1",
+      "User-Agent": "freebuffet/0.2.0",
       "x-api-key": apiKey,
       "anthropic-version": "2023-06-01",
     }

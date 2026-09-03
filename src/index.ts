@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 import pc from "picocolors"
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "fs"
 import { homedir } from "os"
