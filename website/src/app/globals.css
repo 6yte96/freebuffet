@@ -7845,3 +7845,262 @@ body.sponsor-banner-visible .main {
 .mr-1 { margin-right: 0.25rem; }
 .mr-2 { margin-right: 0.5rem; }
 .ml-1 { margin-left: 0.25rem; }
+
+/* ============================================================
+   RESPONSIVE FIXES (mobile & small tablets)
+   Audited at 320 / 375 / 390 / 412 / 768 / 844 / 1280 px
+   ============================================================ */
+
+/* 1. Course filter buttons: 6 uppercase mono buttons in a nowrap row
+      overflow the container on phones. Let them wrap into a clean
+      1px-gapped block that still reads as one segmented control. */
+@media (max-width: 768px) {
+  .editorial-filter-bar .filter-bar-right {
+    width: 100%;
+  }
+
+  .editorial-filter-bar .filter-bar-label {
+    display: none;
+  }
+
+  .editorial-sort-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .editorial-sort-btn {
+    margin-left: 0;
+    padding: 0.5rem 0.5rem;
+    text-align: center;
+    border-left-width: 1px;
+  }
+
+  .editorial-sort-btn + .editorial-sort-btn {
+    margin-top: -1px;
+  }
+
+  .editorial-sort-btn:nth-child(even) {
+    margin-left: -1px;
+  }
+
+  .editorial-filter-bar {
+    gap: 0.85rem;
+  }
+}
+
+/* Two-column course grid only makes sense with a wide list; at tiny
+   widths a single column of buttons is easier to hit. */
+@media (max-width: 400px) {
+  .editorial-sort-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-sort-btn + .editorial-sort-btn {
+    margin-top: -1px;
+    margin-left: 0;
+  }
+
+  .editorial-sort-btn:nth-child(even) {
+    margin-left: 0;
+  }
+}
+
+/* 2. Hero telemetry card: the template hides .hero-visual under 768px,
+      which throws away the real provider counts (165/99/47/19).
+      Restore it as a full-width stats card under the hero text. */
+@media (max-width: 768px) {
+  .hero-visual {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-visual .press-run-card {
+    width: 100%;
+  }
+
+  .press-stat {
+    gap: 1rem;
+    padding: 0.6rem 0;
+  }
+
+  .press-stat-number {
+    font-size: 1.45rem;
+  }
+
+  .press-stat-label {
+    font-size: 10px;
+  }
+}
+
+/* 3. Code window & benchmark table already scroll horizontally; add
+      momentum scrolling and visible affordance on touch devices. */
+@media (max-width: 768px) {
+  .code-window-body,
+  .benchmark-table-wrapper,
+  .code-content {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .benchmark-table-wrapper {
+    position: relative;
+  }
+
+  /* Keep tabular alignment but let long provider names wrap on phones */
+  .benchmark-table td,
+  .benchmark-table th {
+    padding: 0.5rem 0.55rem;
+    word-break: break-word;
+  }
+
+  .benchmark-table td:first-child {
+    white-space: normal;
+  }
+}
+
+/* 4. Tap targets: repo links (13px) and footer links (22px) are
+      below comfortable touch size. Keep the visual size, grow the
+      hit area with padding instead. Applies up to tablet-landscape
+      since those are touch devices too. */
+@media (max-width: 1024px) {
+  .postcard-repo-link {
+    padding: 0.5rem 0;
+  }
+
+  .postcard-footer .postcard-actions {
+    flex-shrink: 0;
+  }
+
+  .footer-link {
+    display: inline-block;
+    padding: 0.4rem 0;
+  }
+
+  .footer-version {
+    display: inline-block;
+    padding: 0.4rem 0;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 5. Postcard card footer: stamp + meta can collide when a card is
+      full-width on phone. Stack copy above the stamp cleanly. */
+@media (max-width: 640px) {
+  .postcard-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .postcard-footer .postcard-actions {
+    align-self: flex-end;
+  }
+
+  .postcard-meta-line {
+    flex-wrap: wrap;
+    gap: 0.25rem 0.35rem;
+  }
+}
+
+/* 6. Drawer (mobile nav): 320px wide overlay is fine, but make sure
+      links are thumb friendly. */
+@media (max-width: 768px) {
+  .drawer-link {
+    min-height: 48px;
+  }
+
+  .drawer-close,
+  .drawer-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* 7. Install tabs & copy button: at 320px the 4 package manager tabs
+      overflow the box; allow horizontal scroll with snap. */
+@media (max-width: 480px) {
+  .install-tabs {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .install-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .install-tab-btn {
+    flex: 0 0 auto;
+  }
+
+  .install-box {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .install-box-code {
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+}
+
+/* 8. Playground code window: horizontal scroll is correct for code,
+      but the session transcript should shrink slightly on phones. */
+@media (max-width: 640px) {
+  .code-window-body {
+    font-size: 0.68rem;
+    line-height: 1.45;
+  }
+}
+
+/* 9. Hero title: keep the three-line broadsheet headline from
+      clipping on very small phones. */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: clamp(1.9rem, 11vw, 2.6rem) !important;
+  }
+
+  .hero-description {
+    font-size: 0.88rem !important;
+  }
+}
+
+/* 10. Landscape phones: short viewport, hero should not push the
+       install command below the fold. */
+@media (max-height: 480px) and (max-width: 900px) {
+  .hero {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .hero-visual {
+    display: none !important;
+  }
+}
+
+/* 11. Desktops and large tablets: nothing changes; hover states stay. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* two-column bento cages collapse to fewer columns between phone
+     and desktop breakpoints so cards keep reasonable proportions */
+  .projects-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+
+  .project-card.bento-xl { grid-column: span 6; grid-row: span 1; }
+  .project-card.bento-tall { grid-column: span 3; grid-row: span 2; }
+  .project-card.bento-wide { grid-column: span 6; }
+  .project-card.bento-md { grid-column: span 3; }
+  .project-card.bento-lg { grid-column: span 6; }
+  .project-card.bento-sm { grid-column: span 3; }
+}
