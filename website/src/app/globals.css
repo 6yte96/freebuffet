@@ -5516,7 +5516,8 @@ body.sponsor-banner-visible .main {
   font-size: clamp(1.85rem, 4.4vw, 3.55rem) !important;
   font-weight: 700 !important;
   letter-spacing: -0.075em !important;
-  line-height: 0.5 !important;
+  line-height: 1.12 !important;
+  text-wrap: balance;
 }
 
 .project-card.postcard-card .postcard-title a {
