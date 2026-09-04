@@ -7116,7 +7116,7 @@ div[id].projects-section {
 
 /* ---- Support: full-row postcard card, same anatomy as the menu ---- */
 
-/* Horizontal rules only. On hover, short vertical ticks (8px) grow
+/* Horizontal rules only. On hover, 20px vertical ticks grow
    inward from both ends of each horizontal rule, like registration
    crop marks. The template's !important rules are overridden since
    this card sits outside the 1px grid cage. */
@@ -7165,7 +7165,7 @@ div[id].projects-section {
 .support-card:hover::after,
 .support-card:focus-within::before,
 .support-card:focus-within::after {
-  height: 8px;
+  height: 20px;
 }
 
 .support-card .support-title {
