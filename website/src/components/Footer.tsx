@@ -18,20 +18,17 @@ export function Footer() {
         <div className="footer-section">
           <h4>Navigation</h4>
           <div className="footer-links">
-            <a href="#features" className="footer-link">
-              Features
+            <a href="#session" className="footer-link">
+              Session
             </a>
-            <a href="#playground" className="footer-link">
-              Code Manifest
+            <a href="#menu" className="footer-link">
+              Menu
             </a>
-            <a href="#benchmarks" className="footer-link">
-              Benchmarks
+            <a href="#free-tiers" className="footer-link">
+              Free Tiers
             </a>
-            <a href="#architecture" className="footer-link">
-              Architecture
-            </a>
-            <a href="#dispatches" className="footer-link">
-              Dispatches
+            <a href="#source" className="footer-link">
+              Source
             </a>
           </div>
         </div>

@@ -1,21 +1,27 @@
 import { Hero } from "@/components/Hero";
-import { FeatureBento } from "@/components/FeatureBento";
 import { Playground } from "@/components/Playground";
+import { FeatureBento } from "@/components/FeatureBento";
 import { Benchmarks } from "@/components/Benchmarks";
 import { Architecture } from "@/components/Architecture";
-import { Changelog } from "@/components/Changelog";
-import { Community } from "@/components/Community";
+import { Footer } from "@/components/Footer";
 
 export default function LandingPage() {
   return (
     <>
+      {/* The pitch: what it is, run it in one command */}
       <Hero />
-      <FeatureBento />
+
+      {/* The proof: a real session and the real files it writes */}
       <Playground />
+
+      {/* The capabilities, searchable like the CLI itself */}
+      <FeatureBento />
+
+      {/* The hook for this audience: free tiers, no credit cards */}
       <Benchmarks />
+
+      {/* The trust: where the code lives and how to improve it */}
       <Architecture />
-      <Changelog />
-      <Community />
     </>
   );
 }

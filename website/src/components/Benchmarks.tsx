@@ -4,18 +4,18 @@ export function Benchmarks() {
   const { benchmarks } = PROJECT_CONFIG;
 
   return (
-    <section id="benchmarks" className="projects-section" style={{ paddingTop: "1rem" }}>
+    <section id="free-tiers" className="projects-section" style={{ paddingTop: "1rem" }}>
       <div className="section-header">
         <div className="section-header-left">
-          <div className="section-label-mono">Section IV</div>
+          <div className="section-label-mono">Section III</div>
           <h2 className="section-title">{benchmarks.title}</h2>
           <p className="section-description">{benchmarks.subtitle}</p>
         </div>
 
         <div className="section-header-right label-mono">
-          Pp. 12 — 15
+          Pp. 03
           <br />
-          Telemetry Run
+          Free Tier Ledger
         </div>
       </div>
 

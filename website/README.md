@@ -4,6 +4,20 @@ Static marketing site for FreeBuffet, built on the [Broadsheet editorial templat
 
 **Live at:** `https://6yte96.github.io/freebuffet/`
 
+## Audience & Structure
+
+The page is written for developers and AI engineers who want free or cheap LLM access without config toil. Sections follow their reading order:
+
+| Section | Answers the question |
+|---------|----------------------|
+| Hero | What is it, how do I run it |
+| `#session` Session | What happens when I run it (real output formats) |
+| `#menu` Menu | What it does, searchable like the CLI |
+| `#free-tiers` Free Tiers | Is it really free (the ledger) |
+| `#source` Source | Where is the code, how to contribute |
+
+Nav is intentionally four items plus GitHub. No changelog or community boilerplate; the roadmap dispatches live at the end of Source.
+
 ## Quick Start
 
 ```sh

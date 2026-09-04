@@ -95,16 +95,7 @@ export interface ProjectConfig {
       role: string;
     }[];
   };
-  changelog: {
-    version: string;
-    date: string;
-    title: string;
-    description: string;
-    tag: string;
-  }[];
   community: {
-    title: string;
-    description: string;
     contributingText: string;
     dispatches: {
       title: string;
@@ -164,8 +155,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
     description:
       "An interactive terminal CLI that health-checks 165 LLM providers, seals your API keys in an AES-256-GCM vault, and auto-generates working configs for OpenCode, Codex CLI, Claude Code, and Antigravity in one sitting.",
     primaryCta: {
-      text: "Browse the Menu",
-      href: "#features",
+      text: "See a Session",
+      href: "#session",
     },
     secondaryCta: {
       text: "View GitHub Repo",
@@ -510,8 +501,9 @@ stream_idle_timeout_ms = 120000
     ],
   },
   architecture: {
-    title: "The Buffet Line, Mapped",
-    subtitle: "How the source is laid out. About 5,000 lines of TypeScript and no native deps.",
+    title: "Under the Hood",
+    subtitle:
+      "Where the code lives. About 5,000 lines of TypeScript, no native deps, and a clear pattern for adding providers.",
     layers: [
       {
         name: "Layer 0: Provider Registry",
@@ -535,36 +527,7 @@ stream_idle_timeout_ms = 120000
       },
     ],
   },
-  changelog: [
-    {
-      version: "v0.2.0",
-      date: "September 2026",
-      title: "Free Credit Relay Registry + Live Status Probing",
-      description:
-        "Added ten public-welfare relay stations with first-day credit math (signup plus invite plus daily check-in), live status probes, and snapshot diffing. The provider registry grew to 165 entries.",
-      tag: "WELFARE",
-    },
-    {
-      version: "v0.1.1",
-      date: "June 2026",
-      title: "OpenCode-Style Searchable Multiselect",
-      description:
-        "Rebuilt provider selection as a type-to-filter checklist with a cleaner interactive loop. Added dual build outputs (tsc lib plus bun bundle) and the npm publishing pipeline.",
-      tag: "UX",
-    },
-    {
-      version: "v0.1.0",
-      date: "June 2026",
-      title: "First Service: 114 Providers, Encrypted Keys",
-      description:
-        "Initial release: a multi-provider setup CLI with health checks, AES-256-GCM key persistence, and config generation for OpenCode, Codex, and Claude Code.",
-      tag: "INAUGURAL",
-    },
-  ],
   community: {
-    title: "Contribute to the Menu",
-    description:
-      "Add a provider, improve the health check, or wire up a new agent target. The registry is data-driven, so every improvement ships from this repository.",
     contributingText:
       "All development happens publicly on GitHub. Adding a provider is one typed object in src/providers.ts, and the health check, config generators, and TUI all follow the same pattern. Run bun run dev to try your changes locally.",
     dispatches: [

@@ -21,10 +21,10 @@ export function Playground() {
   };
 
   return (
-    <section id="playground" className="projects-section" style={{ paddingTop: "1rem" }}>
+    <section id="session" className="projects-section" style={{ paddingTop: "1rem" }}>
       <div className="section-header">
         <div className="section-header-left">
-          <div className="section-label-mono">Section III</div>
+          <div className="section-label-mono">Section I</div>
           <h2 className="section-title">{codePlayground.title}</h2>
           <p className="section-description">
             One session, four agent configs. Every snippet below is the exact
@@ -33,9 +33,9 @@ export function Playground() {
         </div>
 
         <div className="section-header-right label-mono">
-          Pp. 07 — 11
+          Pp. 01
           <br />
-          Runtime Spec
+          Live Session
         </div>
       </div>
 

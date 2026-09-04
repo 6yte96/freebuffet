@@ -26,7 +26,7 @@ export function FeatureBento() {
   }, [features, selectedCategory, searchQuery]);
 
   return (
-    <section id="features" className="projects-section">
+    <section id="menu" className="projects-section">
       <div className="section-header">
         <div className="section-header-left">
           <div className="section-label-mono">Section II</div>
@@ -38,7 +38,7 @@ export function FeatureBento() {
         </div>
 
         <div className="section-header-right label-mono">
-          Pp. 02 — 06
+          Pp. 02
           <br />
           Folio 2026-A
         </div>
