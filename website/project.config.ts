@@ -57,6 +57,7 @@ export interface ProjectConfig {
     title: string;
     description: string;
     repoLinkText?: string;
+    repoHref?: string;
     stamp: {
       label: string;
       value: string;
@@ -201,8 +202,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "A hand-curated registry with baseURLs, env keys, free-tier quotas, and API types. Groq, Cerebras, Gemini, OpenRouter, Ollama — every entry searchable by name or id, filterable by tag.",
       repoLinkText: "src/providers.ts",
-      stamp: { label: "Lines of code", value: "1,691" },
-      meta: "165 ENTRIES",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/src/providers.ts",
+      stamp: { label: "ON THE MENU", value: "165" },
+      meta: "cost-sorted · tag-filtered",
       tilt: "tilt-up",
     },
     {
@@ -214,8 +216,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Pings /v1/models or /v1/messages per provider, measures latency, and discovers the live model list before a single config is written. Unhealthy providers never make it to your agent.",
       repoLinkText: "src/health.ts",
-      stamp: { label: "Lines of code", value: "167" },
-      meta: "401/403 AWARE",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/src/health.ts",
+      stamp: { label: "SIGNALS", value: "3" },
+      meta: "status · latency · model list",
       tilt: "tilt-down",
     },
     {
@@ -227,8 +230,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "API keys are sealed in ~/.config/freebuffet/config.enc with a machine-bound scrypt key. No plaintext, no cloud, no telemetry — keys never leave your box.",
       repoLinkText: "src/config.ts",
-      stamp: { label: "Lines of code", value: "59" },
-      meta: "MACHINE-BOUND",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/src/config.ts",
+      stamp: { label: "KEY LENGTH", value: "256-BIT" },
+      meta: "12B IV · 16B GCM tag",
       tilt: "tilt-up",
     },
     {
@@ -240,8 +244,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Generates opencode.json, ~/.codex/config.toml, ~/.claude/settings.json — plus experimental Antigravity support — from a single provider selection. Existing files are backed up, never clobbered.",
       repoLinkText: "src/configs/",
-      stamp: { label: "Lines of code", value: "458" },
-      meta: "4 TARGETS",
+      repoHref: "https://github.com/6yte96/freebuffet/tree/main/src/configs",
+      stamp: { label: "AGENT TARGETS", value: "4" },
+      meta: "health-gated · backup-first",
       tilt: "tilt-down",
     },
     {
@@ -252,9 +257,10 @@ export const PROJECT_CONFIG: ProjectConfig = {
       title: "19 Local Engines",
       description:
         "Zero-cost local inference: Ollama, LM Studio, llama.cpp, vLLM, SGLang, and 14 more. Key prompts auto-skipped.",
-      repoLinkText: "LOCALHOST / $0",
-      stamp: { label: "Local engines", value: "19" },
-      meta: "NO KEY NEEDED",
+      repoLinkText: "README § Local & Self-Hosted",
+      repoHref: "https://github.com/6yte96/freebuffet#local--self-hosted-18",
+      stamp: { label: "PRICE", value: "$0" },
+      meta: "no env key required",
       tilt: "tilt-up",
     },
     {
@@ -266,8 +272,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "A registry of public-welfare relay stations handing out free Claude/GPT credits — $50–$100 signup bonuses, daily check-ins, invite stacking. FreeBuffet probes their live status and calculates your first-day total.",
       repoLinkText: "data/welfare-sites.json",
-      stamp: { label: "Relay sites", value: "10" },
-      meta: "DAILY CHECK-INS",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/data/welfare-sites.json",
+      stamp: { label: "RELAY STATIONS", value: "10" },
+      meta: "signup + invite + daily math",
       tilt: "tilt-down",
     },
     {
@@ -279,8 +286,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "The editor's picks: capability tags — coding, reasoning, vision, fast, free, no-cc — so you pick a provider in seconds, not settings tabs.",
       repoLinkText: "CURATED_FAVORITES",
-      stamp: { label: "Curated picks", value: "25" },
-      meta: "6 CAPABILITY TAGS",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/src/providers.ts",
+      stamp: { label: "OF 165 PICKED", value: "25" },
+      meta: "coding · reasoning · vision · free · fast · no-cc",
       tilt: "tilt-up",
     },
     {
@@ -292,8 +300,9 @@ export const PROJECT_CONFIG: ProjectConfig = {
       description:
         "Type-to-filter provider checklist, live health-check spinners, config preview before write. Runs on Node 18+ and Bun — one runtime dep (picocolors), zero native modules.",
       repoLinkText: "src/index.ts",
-      stamp: { label: "Lines of code", value: "1,693" },
-      meta: "1 RUNTIME DEP",
+      repoHref: "https://github.com/6yte96/freebuffet/blob/main/src/index.ts",
+      stamp: { label: "RUNTIME DEPS", value: "1" },
+      meta: "node 18+ · bun 1.0+",
       tilt: "tilt-down",
     },
   ],

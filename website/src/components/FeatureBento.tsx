@@ -4,10 +4,9 @@ import { useState, useMemo } from "react";
 import { PROJECT_CONFIG } from "@/config";
 
 export function FeatureBento() {
-  const { features, links, brand } = PROJECT_CONFIG;
+  const { features, links } = PROJECT_CONFIG;
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [bookmarkedIds, setBookmarkedIds] = useState<Record<string, boolean>>({});
 
   const categories = useMemo(() => {
     const set = new Set(features.map((f) => f.category));
@@ -21,27 +20,20 @@ export function FeatureBento() {
       const query = searchQuery.toLowerCase().trim();
       if (!query) return matchCat;
 
-      const text = `${feat.title} ${feat.description} ${feat.tech} ${feat.category}`.toLowerCase();
+      const text = `${feat.title} ${feat.description} ${feat.tech} ${feat.category} ${feat.meta}`.toLowerCase();
       return matchCat && text.includes(query);
     });
   }, [features, selectedCategory, searchQuery]);
-
-  const toggleBookmark = (id: string) => {
-    setBookmarkedIds((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
 
   return (
     <section id="features" className="projects-section">
       <div className="section-header">
         <div className="section-header-left">
           <div className="section-label-mono">Section II</div>
-          <h2 className="section-title">Core Capabilities</h2>
+          <h2 className="section-title">The Menu</h2>
           <p className="section-description">
-            Architectural primitives and systems features powering resilient,
-            zero-overhead execution.
+            Every capability between <code>npx</code> and a working agent
+            config — searchable by keyword, filterable by course.
           </p>
         </div>
 
@@ -60,7 +52,7 @@ export function FeatureBento() {
           <div className="editorial-search-form">
             <input
               type="text"
-              placeholder="grep capability, architecture, protocol…"
+              placeholder="grep provider, health, vault, welfare…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="editorial-search-input"
@@ -69,7 +61,7 @@ export function FeatureBento() {
         </div>
 
         <div className="filter-bar-right">
-          <span className="label-mono filter-bar-label">sort</span>
+          <span className="label-mono filter-bar-label">course</span>
           <div className="editorial-sort-buttons">
             {categories.map((cat) => (
               <button
@@ -89,88 +81,56 @@ export function FeatureBento() {
 
       {/* Bento Grid */}
       <div className="projects-grid">
-        {filteredFeatures.map((feat, index) => {
-          const isBookmarked = !!bookmarkedIds[feat.id];
+        {filteredFeatures.map((feat, index) => (
+          <article
+            key={feat.id}
+            id={feat.id}
+            className={`project-card postcard-card ${feat.bentoClass}`}
+            style={{ animationDelay: `${(index % 6) * 0.1}s` }}
+          >
+            <div className="postcard-topline">
+              <div className="postcard-tags">
+                <span className={`postcard-tag boxed ${feat.tilt}`}>
+                  {feat.category}
+                </span>
+                <span className="postcard-tag plain">{feat.tech}</span>
+              </div>
+            </div>
 
-          return (
-            <article
-              key={feat.id}
-              className={`project-card postcard-card ${feat.bentoClass}`}
-              style={{ animationDelay: `${(index % 6) * 0.1}s` }}
-            >
-              <div className="postcard-topline">
-                <div className="postcard-tags">
-                  <span className={`postcard-tag boxed ${feat.tilt}`}>
-                    {feat.category}
-                  </span>
-                  <span className="postcard-tag plain">{feat.tech}</span>
+            <div className="card-content postcard-content">
+              <h3 className="card-title postcard-title">{feat.title}</h3>
+              <p className="card-excerpt postcard-excerpt">{feat.description}</p>
+            </div>
+
+            <div className="card-footer postcard-footer">
+              <div className="postcard-footer-copy">
+                <a
+                  href={feat.repoHref || links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="postcard-repo-link"
+                >
+                  <span aria-hidden="true">↳</span>
+                  <span>{feat.repoLinkText || feat.id}</span>
+                </a>
+
+                <div className="postcard-meta-line">
+                  <span>{feat.meta}</span>
                 </div>
               </div>
 
-              <div className="card-content postcard-content">
-                <h3 className="card-title postcard-title">
-                  <a href={`#${feat.id}`}>{feat.title}</a>
-                </h3>
-                <p className="card-excerpt postcard-excerpt">
-                  By @{brand.handle} — {feat.description}
-                </p>
-              </div>
-
-              <div className="card-footer postcard-footer">
-                <div className="postcard-footer-copy">
-                  <a
-                    href={links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="postcard-repo-link"
-                  >
-                    <span aria-hidden="true">↳</span>
-                    <span>{feat.repoLinkText || `${brand.name}/${feat.id}`}</span>
-                  </a>
-
-                  <div className="postcard-meta-line">
-                    <span>@{brand.handle}</span>
-                    <span>·</span>
-                    <span>{feat.meta}</span>
-                    <span>·</span>
-                    <time dateTime="2026-09-01">2026 EDITION</time>
-                  </div>
-                </div>
-
-                <div className="postcard-actions">
-                  <div className="bookmark-container text-bookmark postcard-bookmark">
-                    <button
-                      onClick={() => toggleBookmark(feat.id)}
-                      className={`bookmark-btn ${
-                        isBookmarked ? "bookmarked" : ""
-                      }`}
-                      title={
-                        isBookmarked
-                          ? "Remove bookmark"
-                          : "Bookmark capability"
-                      }
-                      aria-label="Bookmark capability"
-                    >
-                      <i
-                        className={
-                          isBookmarked ? "fas fa-bookmark" : "far fa-bookmark"
-                        }
-                      ></i>
-                    </button>
-                  </div>
-
-                  <div
-                    className="postcard-impressions-stamp"
-                    title={`${feat.stamp.label}: ${feat.stamp.value}`}
-                  >
-                    <span>{feat.stamp.label}</span>
-                    <strong>{feat.stamp.value}</strong>
-                  </div>
+              <div className="postcard-actions">
+                <div
+                  className="postcard-impressions-stamp"
+                  title={`${feat.stamp.label}: ${feat.stamp.value}`}
+                >
+                  <span>{feat.stamp.label}</span>
+                  <strong>{feat.stamp.value}</strong>
                 </div>
               </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

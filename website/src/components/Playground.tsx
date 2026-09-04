@@ -27,8 +27,8 @@ export function Playground() {
           <div className="section-label-mono">Section III</div>
           <h2 className="section-title">{codePlayground.title}</h2>
           <p className="section-description">
-            Idiomatic bindings across multiple language runtimes with uniform
-            zero-copy semantics.
+            One session, four agent configs. Every snippet below is the exact
+            format FreeBuffet writes to disk.
           </p>
         </div>
 
