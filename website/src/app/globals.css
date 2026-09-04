@@ -7114,51 +7114,44 @@ div[id].projects-section {
   color: rgba(242, 248, 252, 0.78);
 }
 
-/* ---- Support strip: star, share, sponsor ---- */
+/* ---- Support: full-row postcard card, same anatomy as the menu ---- */
 
-.support-strip {
-  border: 1px solid var(--rule);
-  background: var(--surface);
-  max-width: var(--container-max);
-  margin: 2.25rem auto 0;
-  padding: 1.5rem;
+.support-card {
+  grid-column: 1 / -1;
+  min-height: 0 !important;
+  padding: 1.75rem 1.5rem;
+}
+
+.support-card .support-title {
+  font-size: clamp(1.9rem, 4.4vw, 3.55rem) !important;
+  max-width: 100% !important;
+  line-height: 1.12 !important;
+  margin: 0 !important;
+}
+
+.support-card .support-excerpt {
+  max-width: 62ch !important;
+  margin: 1.15rem 0 0 !important;
+}
+
+.support-footer {
+  margin-top: auto;
+  align-items: flex-end;
+}
+
+.support-footer .postcard-actions {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
-  width: calc(100% - (2 * var(--container-padding)));
-}
-
-.support-copy {
-  flex: 1 1 260px;
-  min-width: 0;
-}
-
-.support-copy .support-heading {
-  margin: 0 0 0.35rem;
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.support-copy .support-text {
-  margin: 0;
-  color: var(--muted-foreground);
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  line-height: 1.55;
+  align-items: flex-end;
+  gap: 1rem;
 }
 
 .support-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.6rem;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .support-btn {
@@ -7200,14 +7193,25 @@ div[id].projects-section {
 }
 
 @media (max-width: 640px) {
-  .support-strip {
+  .support-card {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .support-footer {
     flex-direction: column;
-    align-items: stretch;
-    text-align: left;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .support-footer .postcard-actions {
+    width: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
   }
 
   .support-actions {
     justify-content: flex-start;
+    width: 100%;
   }
 
   .support-btn {
