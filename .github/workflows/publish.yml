@@ -1,0 +1,72 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force publish even if version check indicates already published'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Build package
+        run: bun run build
+
+      - name: Verify package contents
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          IS_PUBLISHED=$(npm view freebuffet@${PKG_VERSION} version 2>/dev/null || true)
+
+          echo "Detected package version: ${PKG_VERSION}"
+
+          if [ -n "$IS_PUBLISHED" ] && [ "${{ github.event.inputs.force }}" != "true" ]; then
+            echo "Version ${PKG_VERSION} is already published on npm registry."
+            echo "Skipping publication. Bump the version in package.json to release a new version."
+            exit 0
+          fi
+
+          echo "Publishing freebuffet@${PKG_VERSION} to npm registry..."
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
