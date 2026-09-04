@@ -7215,3 +7215,47 @@ div[id].projects-section {
     justify-content: center;
   }
 }
+
+/* ---- Hero quiet support icons: star + sponsor in the same muted
+      mono register as the telemetry card, borderless until hover ---- */
+
+.hero-quiet-support {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  margin-top: 0.55rem;
+}
+
+.hero-support-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.hero-support-icon i {
+  font-size: 12px;
+}
+
+.hero-support-icon:hover {
+  color: var(--ink);
+  border-color: var(--rule-soft);
+}
+
+.hero-support-icon:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+@media (hover: none) {
+  .hero-support-icon:active {
+    color: var(--ink);
+    transform: scale(0.92);
+  }
+}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PROJECT_CONFIG } from "@/config";
 
 export function Hero() {
-  const { hero, install, telemetry } = PROJECT_CONFIG;
+  const { hero, install, telemetry, links } = PROJECT_CONFIG;
   const [selectedManager, setSelectedManager] = useState(
     install.defaultManager || "npm"
   );
@@ -117,6 +117,29 @@ export function Hero() {
           ))}
         </div>
         <div className="press-run-update">{telemetry.updatedText}</div>
+
+        <div className="hero-quiet-support" role="group" aria-label="Support FreeBuffet">
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-support-icon"
+            title="Star on GitHub"
+            aria-label="Star on GitHub"
+          >
+            <i className="far fa-star"></i>
+          </a>
+          <a
+            href={`${links.github}/sponsorships`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-support-icon"
+            title="Sponsor"
+            aria-label="Sponsor"
+          >
+            <i className="fas fa-heart"></i>
+          </a>
+        </div>
       </div>
     </section>
   );
