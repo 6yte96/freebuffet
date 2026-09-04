@@ -3,6 +3,7 @@ import { Playground } from "@/components/Playground";
 import { FeatureBento } from "@/components/FeatureBento";
 import { Benchmarks } from "@/components/Benchmarks";
 import { Architecture } from "@/components/Architecture";
+import { Support } from "@/components/Support";
 import { Footer } from "@/components/Footer";
 
 export default function LandingPage() {
@@ -22,6 +23,9 @@ export default function LandingPage() {
 
       {/* The trust: where the code lives and how to improve it */}
       <Architecture />
+
+      {/* The ask: star, share, sponsor */}
+      <Support />
     </>
   );
 }

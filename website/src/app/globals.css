@@ -7054,3 +7054,164 @@ div[id].projects-section {
 .dark ::-webkit-scrollbar-track {
   background: var(--background);
 }
+
+/* ============================================================
+   SOURCE SECTION — CHRONICLE CARDS + SUPPORT
+   (these classes shipped unstyled in the template)
+   ============================================================ */
+
+.editorial-chronicle-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1.5rem;
+}
+
+.editorial-chronicle-card {
+  border: 1px solid var(--rule);
+  background: var(--background);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.chronicle-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chronicle-layer-tag {
+  flex-shrink: 0;
+}
+
+.chronicle-role {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.chronicle-body {
+  flex: 1;
+}
+
+.chronicle-text {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+/* dark mode keeps the dimmed ink readable on the night edition */
+.dark .chronicle-text {
+  color: rgba(242, 248, 252, 0.78);
+}
+
+/* ---- Support strip: star, share, sponsor ---- */
+
+.support-strip {
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  max-width: var(--container-max);
+  margin: 2.25rem auto 0;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - (2 * var(--container-padding)));
+}
+
+.support-copy {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.support-copy .support-heading {
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.support-copy .support-text {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.support-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.65rem 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.08s ease;
+}
+
+.support-btn:hover {
+  background: var(--background);
+}
+
+.support-btn.primary {
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+}
+
+.support-btn.primary:hover {
+  background: var(--background);
+  color: var(--ink);
+}
+
+@media (hover: none) {
+  .support-btn:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (max-width: 640px) {
+  .support-strip {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .support-actions {
+    justify-content: flex-start;
+  }
+
+  .support-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

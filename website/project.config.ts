@@ -92,6 +92,7 @@ export interface ProjectConfig {
     subtitle: string;
     layers: {
       name: string;
+      tag: string;
       role: string;
     }[];
   };
@@ -506,23 +507,28 @@ stream_idle_timeout_ms = 120000
       "Where the code lives. About 5,000 lines of TypeScript, no native deps, and a clear pattern for adding providers.",
     layers: [
       {
-        name: "Layer 0: Provider Registry",
+        name: "Provider Registry",
+        tag: "LAYER 0",
         role: "165 typed entries in src/providers.ts, each with an id, baseURL, env key, API type, free tier, and tags. Query helpers handle search, cost sorting, and tag filtering.",
       },
       {
-        name: "Layer 1: Health Check",
+        name: "Health Check",
+        tag: "LAYER 1",
         role: "src/health.ts probes each provider at /v1/models or /v1/messages and returns the status, the latency in milliseconds, and the list of models it found. Bad keys are separated from bad providers.",
       },
       {
-        name: "Layer 2: Encrypted Key Store",
+        name: "Encrypted Key Store",
+        tag: "LAYER 2",
         role: "src/config.ts seals your keys with AES-256-GCM under a scrypt key derived from your home directory, hostname, and platform. The vault at ~/.config/freebuffet/config.enc only opens on the machine that wrote it.",
       },
       {
-        name: "Layer 3: Config Generators",
+        name: "Config Generators",
+        tag: "LAYER 3",
         role: "src/configs/ turns healthy providers into real files: opencode.json and auth.json for OpenCode, config.toml for Codex, settings.json and env.sh for Claude Code, plus experimental Antigravity entries. Anything that exists already gets a timestamped backup first.",
       },
       {
-        name: "Layer 4: Welfare Registry",
+        name: "Welfare Registry",
+        tag: "LAYER 4",
         role: "src/welfare.ts tracks ten free-credit relay stations from data/welfare-sites.json. It adds up signup, invite, and daily check-in credits into a first-day total, probes live status, and merges snapshots when a site is behind Cloudflare.",
       },
     ],

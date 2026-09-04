@@ -27,14 +27,16 @@ export function Architecture() {
           {architecture.layers.map((layer, idx) => (
             <div key={idx} className="editorial-chronicle-card">
               <div className="chronicle-header">
-                <span className="label-mono">LAYER {idx}</span>
-                <h3 className="chronicle-role">{layer.name}</h3>
+                <div className="chronicle-title-row">
+                  <span className="postcard-tag boxed tilt-up chronicle-layer-tag">
+                    {layer.tag}
+                  </span>
+                  <h3 className="chronicle-role">{layer.name}</h3>
+                </div>
               </div>
 
               <div className="chronicle-body">
-                <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                  {layer.role}
-                </p>
+                <p className="chronicle-text">{layer.role}</p>
               </div>
             </div>
           ))}
