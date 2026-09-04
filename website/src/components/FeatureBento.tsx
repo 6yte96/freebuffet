@@ -29,18 +29,11 @@ export function FeatureBento() {
     <section id="menu" className="projects-section">
       <div className="section-header">
         <div className="section-header-left">
-          <div className="section-label-mono">Section II</div>
           <h2 className="section-title">The Menu</h2>
           <p className="section-description">
             Every capability between <code>npx</code> and a working agent
             config. Search by keyword, filter by course.
           </p>
-        </div>
-
-        <div className="section-header-right label-mono">
-          Pp. 02
-          <br />
-          Folio 2026-A
         </div>
       </div>
 

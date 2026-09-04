@@ -21,7 +21,6 @@ export interface ProjectConfig {
   };
   hero: {
     issueBadge: string;
-    edition: string;
     titleLines: {
       before: string;
       highlight: string;
@@ -146,8 +145,7 @@ export const PROJECT_CONFIG: ProjectConfig = {
     handle: "6yte96",
   },
   hero: {
-    issueBadge: "Issue v0.2.0",
-    edition: "Menu Edition 2026-A",
+    issueBadge: "v0.2.0",
     titleLines: {
       before: "All-You-Can-Eat",
       highlight: "LLM Provider",

@@ -7,15 +7,8 @@ export function Architecture() {
     <section id="source" className="projects-section" style={{ paddingTop: "1rem" }}>
       <div className="section-header">
         <div className="section-header-left">
-          <div className="section-label-mono">Section IV</div>
           <h2 className="section-title">{architecture.title}</h2>
           <p className="section-description">{architecture.subtitle}</p>
-        </div>
-
-        <div className="section-header-right label-mono">
-          Pp. 04
-          <br />
-          Source &amp; Ledger
         </div>
       </div>
 

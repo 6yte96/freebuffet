@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PROJECT_CONFIG } from "@/config";
 
 export function Hero() {
@@ -9,18 +9,6 @@ export function Hero() {
     install.defaultManager || "npm"
   );
   const [copied, setCopied] = useState(false);
-  const [currentDate, setCurrentDate] = useState("Thursday, September 3, 2026");
-
-  useEffect(() => {
-    setCurrentDate(
-      new Date().toLocaleDateString("en-US", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    );
-  }, []);
 
   const currentCommand =
     install.managers[selectedManager] || `npm install ${PROJECT_CONFIG.brand.name}`;
@@ -38,9 +26,6 @@ export function Hero() {
       <div className="hero-content">
         <div className="issue-line">
           <span className="issue-badge">{hero.issueBadge}</span>
-          <span>
-            {currentDate} &middot; {hero.edition}
-          </span>
         </div>
 
         <h1 className="hero-title">
