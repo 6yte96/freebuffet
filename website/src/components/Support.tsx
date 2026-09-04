@@ -33,7 +33,6 @@ export function Support() {
           <div className="postcard-topline">
             <div className="postcard-tags">
               <span className="postcard-tag boxed tilt-up">SUPPORT</span>
-              <span className="postcard-tag plain">MIT LICENSE / OPEN SOURCE</span>
             </div>
           </div>
 
