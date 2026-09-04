@@ -29,15 +29,6 @@ export function Architecture() {
               <div className="chronicle-header">
                 <span className="label-mono">PROTOCOL LAYER {idx}</span>
                 <h3 className="chronicle-role">{layer.name}</h3>
-                <span
-                  style={{
-                    fontSize: "11px",
-                    fontFamily: "var(--font-mono)",
-                    color: "var(--muted-foreground)",
-                  }}
-                >
-                  SPEC // {layer.spec}
-                </span>
               </div>
 
               <div className="chronicle-body">

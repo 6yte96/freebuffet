@@ -33,7 +33,7 @@ export function FeatureBento() {
           <h2 className="section-title">The Menu</h2>
           <p className="section-description">
             Every capability between <code>npx</code> and a working agent
-            config — searchable by keyword, filterable by course.
+            config. Search by keyword, filter by course.
           </p>
         </div>
 
