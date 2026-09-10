@@ -652,6 +652,16 @@ const PROVIDERS: Provider[] = [
     permanentFree: true,
   },
   {
+    id: "bifrost",
+    name: "Bifrost AI Gateway",
+    baseURL: "http://localhost:8080/v1",
+    website: "https://github.com/maximhq/bifrost",
+    apiType: "openai-compatible",
+    freeTier: "Unlimited (self-hosted)",
+    noCc: true,
+    permanentFree: true,
+  },
+  {
     id: "browserai",
     name: "BrowserAI",
     baseURL: "https://api.browserai.com/v1",
