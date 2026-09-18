@@ -115,7 +115,7 @@ OVHcloud, Scaleway, Nebius, Aleph Alpha, AiQu, Berget AI, Cortecs AI, EUrouter, 
 
 ### Gateways & Aggregators
 
-OpenRouter, Portkey, Helicone, LiteLLM, Cloudflare AI Gateway, Vercel AI Gateway, Routeway, Adaline, LLM Gateway, TokenRouter, FastRouter, ZenMux.
+OpenRouter, Portkey, Helicone, LiteLLM, Cloudflare AI Gateway, Vercel AI Gateway, [Bifrost](https://github.com/maximhq/bifrost), Routeway, Adaline, LLM Gateway, TokenRouter, FastRouter, ZenMux.
 
 ## Development
 
