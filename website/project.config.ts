@@ -139,8 +139,8 @@ export const PROJECT_CONFIG: ProjectConfig = {
     author: "6yte96",
   },
   brand: {
-    name: "freebuffet",
-    domainSuffix: ".io",
+    name: "FreeBuffet",
+    domainSuffix: "",
     tagline: "An all-you-can-eat menu of LLM providers, no email required",
     handle: "6yte96",
   },
