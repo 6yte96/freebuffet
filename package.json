@@ -7,7 +7,8 @@
   "types": "dist/index.d.ts",
   "bin": {
     "fb": "dist/index.js",
-    "freebuffet": "dist/index.js"
+    "freebuffet": "dist/index.js",
+    "agent-stats": "dist/agent-stats.js"
   },
   "exports": {
     ".": {
@@ -33,11 +34,15 @@
     "./welfare": {
       "types": "./dist/welfare.d.ts",
       "default": "./dist/welfare.js"
+    },
+    "./agent-stats": {
+      "types": "./dist/agent-stats.d.ts",
+      "default": "./dist/agent-stats.js"
     }
   },
   "scripts": {
     "build": "bun run build:lib && bun run build:bundle",
-    "build:bundle": "bun build ./src/index.ts --outdir ./dist --target node",
+    "build:bundle": "bun build ./src/index.ts --outdir ./dist --target node && bun build ./src/agent-stats-cli.ts --outdir ./dist --target node",
     "build:lib": "tsc --outDir dist",
     "dev": "bun run ./src/index.ts",
     "typecheck": "tsc --noEmit",

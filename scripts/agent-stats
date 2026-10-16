@@ -1,0 +1,34 @@
+#!/bin/bash
+#############################################
+# agent-stats — scan local CLI/GUI agent token usage + streaks
+#
+# Detects: OpenCode, Codex CLI, Claude Code, Antigravity, pi, Hermes, Zed
+# Reads local configs and logs; reports token totals, daily activity, and streaks.
+#
+# Usage:
+#   bunx agent-stats             # human-readable report
+#   bunx agent-stats --json      # JSON output
+#   curl -fsSL https://raw.githubusercontent.com/your/repo/main/scripts/agent-stats | bash
+#############################################
+set -euo pipefail
+
+# Resolve the freebuffet repo root (assumes script is at scripts/agent-stats)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+EXEC="${BUN_EXECUTABLE:-bun}"
+
+if ! command -v "$EXEC" >/dev/null 2>&1; then
+    echo "Error: '$EXEC' not found. Install bun: https://bun.sh" >&2
+    exit 1
+fi
+
+# If running from a fresh checkout, ensure dependencies
+if [ ! -d "$PROJECT_ROOT/node_modules" ]; then
+    echo "[agent-stats] Installing dependencies..." >&2
+    cd "$PROJECT_ROOT"
+    "$EXEC" install --quiet
+    cd - >/dev/null
+fi
+
+exec "$EXEC" run "$PROJECT_ROOT/src/agent-stats-cli.ts" "$@"
