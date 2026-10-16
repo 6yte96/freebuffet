@@ -160,6 +160,18 @@ export function Header({ currentSection: initialSection = "home" }: HeaderProps)
             <i className="fab fa-github"></i>
             <span>GitHub Repository</span>
           </a>
+          {links.portfolio && (
+            <a
+              href={links.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-link"
+              onClick={closeDrawer}
+            >
+              <i className="fas fa-laptop-code"></i>
+              <span>Portfolio (6yte96.me)</span>
+            </a>
+          )}
         </nav>
 
         <div className="drawer-footer">

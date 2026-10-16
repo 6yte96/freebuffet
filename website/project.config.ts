@@ -112,6 +112,7 @@ export interface ProjectConfig {
     npm?: string;
     crates?: string;
     pypi?: string;
+    portfolio?: string;
   };
 }
 
@@ -565,5 +566,6 @@ stream_idle_timeout_ms = 120000
     github: "https://github.com/6yte96/freebuffet",
     docs: "https://github.com/6yte96/freebuffet#readme",
     npm: "https://www.npmjs.com/package/freebuffet",
+    portfolio: "https://6yte96.me",
   },
 };

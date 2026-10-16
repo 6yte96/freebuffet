@@ -78,6 +78,17 @@ export function Footer() {
                 <i className="fab fa-npm"></i>
               </a>
             )}
+            {links.portfolio && (
+              <a
+                href={links.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+                title="6yte96.me Portfolio"
+              >
+                <i className="fas fa-laptop-code"></i>
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -96,7 +107,16 @@ export function Footer() {
             MIT License
           </a>
           {" // "}
-          v0.2.0 // @{brand.handle}
+          v0.2.0
+          {" // "}
+          <a
+            href={links.portfolio || "https://6yte96.me"}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            6yte96.me
+          </a>
         </p>
       </div>
     </footer>

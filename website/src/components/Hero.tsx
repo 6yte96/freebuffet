@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PROJECT_CONFIG } from "@/config";
+import { HeroBuffetVisual } from "./HeroBuffetVisual";
 
 export function Hero() {
   const { hero, install, telemetry, links } = PROJECT_CONFIG;
@@ -104,42 +105,50 @@ export function Hero() {
             <span>{hero.secondaryCta.text}</span>
           </a>
         </div>
+        {/* Published package and live page */}
+        <div
+          className="font-mono text-xs text-muted-foreground"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "0.5rem 1rem",
+            marginTop: "1.5rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+          }}
+        >
+          <a
+            href="https://www.npmjs.com/package/freebuffet"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            npm: freebuffet@0.2.0
+          </a>
+          <span>MIT License</span>
+          <span>node &gt;= 18 / bun &gt;= 1.0</span>
+          <a
+            href="https://6yte96.github.io/freebuffet/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            live page
+          </a>
+          <a
+            href="https://6yte96.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            6yte96.me
+          </a>
+        </div>
       </div>
 
       <div className="hero-visual">
-        <div className="press-run-card">
-          <div className="press-run-label">{telemetry.label}</div>
-          {telemetry.stats.map((stat, idx) => (
-            <div key={idx} className="press-stat">
-              <span className="press-stat-number">{stat.number}</span>
-              <span className="press-stat-label">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-        <div className="press-run-update">{telemetry.updatedText}</div>
-
-        <div className="hero-quiet-support" role="group" aria-label="Support FreeBuffet">
-          <a
-            href={links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-support-icon"
-            title="Star on GitHub"
-            aria-label="Star on GitHub"
-          >
-            <i className="far fa-star"></i>
-          </a>
-          <a
-            href={`${links.github}/sponsorships`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-support-icon"
-            title="Sponsor"
-            aria-label="Sponsor"
-          >
-            <i className="fas fa-heart"></i>
-          </a>
-        </div>
+        <HeroBuffetVisual />
       </div>
     </section>
   );
