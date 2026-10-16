@@ -374,6 +374,7 @@ export function HeroBuffetVisual() {
   const [selectedAgent, setSelectedAgent] = useState<TargetAgent>("opencode");
   const [copied, setCopied] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [showTicket, setShowTicket] = useState<boolean>(false);
   const [servingAlert, setServingAlert] = useState<string | null>(null);
   const [activeLog, setActiveLog] = useState<string>(
     "🍱 FreeBuffet Tasting Table · Spin the carousel to sample 165+ free LLM dishes"
@@ -1126,6 +1127,14 @@ export function HeroBuffetVisual() {
           </button>
           <button
             type="button"
+            onClick={() => setShowTicket((s) => !s)}
+            className={`buffet-btn font-mono ${showTicket ? "primary" : ""}`}
+            title="Inspect provider details and agent configs"
+          >
+            {showTicket ? "HIDE RECEIPT ✕" : `RECEIPT: ${selectedDish.name} 🧾`}
+          </button>
+          <button
+            type="button"
             onClick={() => rotateToDish("cerebras")}
             className="buffet-btn font-mono"
             title="Rotate to fastest dish"
@@ -1170,19 +1179,31 @@ export function HeroBuffetVisual() {
         <canvas ref={canvasRef} className="buffet-canvas" />
 
         {/* Restaurant Order Receipt Docket (Selected Dish Inspector) */}
-        <div className="buffet-order-ticket font-mono" role="region" aria-label="Order Ticket">
-          <div className="ticket-header">
-            <div className="ticket-title-row">
-              <span className="ticket-dish-icon">{selectedDish.foodIcon}</span>
-              <div>
-                <div className="ticket-dish-name">{selectedDish.name}</div>
-                <div className="ticket-dish-sub">{selectedDish.subtitle}</div>
+        {showTicket && (
+          <div className="buffet-order-ticket font-mono" role="dialog" aria-label="Order Ticket">
+            <div className="ticket-header">
+              <div className="ticket-title-row">
+                <span className="ticket-dish-icon">{selectedDish.foodIcon}</span>
+                <div>
+                  <div className="ticket-dish-name">{selectedDish.name}</div>
+                  <div className="ticket-dish-sub">{selectedDish.subtitle}</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <div className="ticket-latency-tag" style={{ color: selectedDish.accentColor }}>
+                  {selectedDish.latencyMs}ms OK
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowTicket(false)}
+                  className="ticket-close-btn font-mono"
+                  aria-label="Close ticket"
+                  title="Hide receipt box"
+                >
+                  &times;
+                </button>
               </div>
             </div>
-            <div className="ticket-latency-tag" style={{ color: selectedDish.accentColor }}>
-              {selectedDish.latencyMs}ms OK
-            </div>
-          </div>
 
           <div className="ticket-body">
             <div className="ticket-meta-row">
@@ -1267,6 +1288,7 @@ export function HeroBuffetVisual() {
             </div>
           </div>
         </div>
+      )}
       </div>
 
       {/* Chef's Status Telemetry Ticker */}

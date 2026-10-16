@@ -4613,6 +4613,22 @@ html {
   background: var(--surface);
 }
 
+.ticket-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.ticket-close-btn:hover {
+  opacity: 1;
+}
+
 .ticket-body {
   padding: 0.55rem 0.65rem;
   display: flex;
